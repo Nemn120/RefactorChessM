@@ -129,21 +129,7 @@ public class Pawn
      */
     @Override
     public ImageIcon createImageByPieceType(){
-        if ( getColorOfPiece() == ChessGamePiece.WHITE ){
-            return new ImageIcon(
-                getClass().getResource("/ChessImages/WhitePawn.gif")
-            );            
-        }
-        else if ( getColorOfPiece() == ChessGamePiece.BLACK ){
-            return new ImageIcon(
-                getClass().getResource("/ChessImages/BlackPawn.gif")
-            );            
-        }
-        else
-        {
-            return new ImageIcon(
-                getClass().getResource("/ChessImages/default-Unassigned.gif")
-            );           
-        }
+        String nameClass = this.getClass().getName();
+        return ChessGamePiece.getImageIcon(nameClass,getColorOfPiece());
     }
 }
