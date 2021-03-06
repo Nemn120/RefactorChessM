@@ -1,5 +1,6 @@
 package Business.pieces;
 
+import Business.pieces.move.ICruzMove;
 import GUI.board.ChessGameBoard;
 
 import javax.swing.*;
@@ -30,6 +31,10 @@ public class Rook
      * @param color
      *            either GamePiece.WHITE, BLACK, or UNASSIGNED
      */
+    
+    ICruzMove cruzMove;
+    
+    
     public Rook( ChessGameBoard board, int row, int col, int color ){
         super( board, row, col, color );
     }
@@ -40,10 +45,10 @@ public class Rook
      */
     @Override
     protected ArrayList<String> calculatePossibleMoves( ChessGameBoard board ){
-        ArrayList<String> northMoves = calculateNorthMoves( board, 8 );
-        ArrayList<String> southMoves = calculateSouthMoves( board, 8 );
-        ArrayList<String> westMoves = calculateWestMoves( board, 8 );
-        ArrayList<String> eastMoves = calculateEastMoves( board, 8 );
+        ArrayList<String> northMoves = cruzMove.calculateNorthMoves( board, 8 );
+        ArrayList<String> southMoves = cruzMove.calculateSouthMoves( board, 8 );
+        ArrayList<String> westMoves = cruzMove.calculateWestMoves( board, 8 );
+        ArrayList<String> eastMoves = cruzMove.calculateEastMoves( board, 8 );
         ArrayList<String> allMoves = new ArrayList<String>();
         allMoves.addAll( northMoves );
         allMoves.addAll( southMoves );

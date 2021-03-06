@@ -1,5 +1,6 @@
 package Business.pieces;
 
+import Business.pieces.move.ICruzMove;
 import GUI.board.ChessGameBoard;
 
 import javax.swing.*;
@@ -17,6 +18,8 @@ import java.util.ArrayList;
  */
 public class Queen
     extends ChessGamePiece{
+
+    private ICruzMove cruzMove;
     // ----------------------------------------------------------
     /**
      * Create a new Queen object.
@@ -44,10 +47,10 @@ public class Queen
         ArrayList<String> northWestMoves = calculateNorthWestMoves( board, 8 );
         ArrayList<String> southEastMoves = calculateSouthEastMoves( board, 8 );
         ArrayList<String> southWestMoves = calculateSouthWestMoves( board, 8 );
-        ArrayList<String> northMoves = calculateNorthMoves( board, 8 );
-        ArrayList<String> southMoves = calculateSouthMoves( board, 8 );
-        ArrayList<String> eastMoves = calculateEastMoves( board, 8 );
-        ArrayList<String> westMoves = calculateWestMoves( board, 8 );
+        ArrayList<String> northMoves = cruzMove.calculateNorthMoves( board, 8 );
+        ArrayList<String> southMoves = cruzMove.calculateSouthMoves( board, 8 );
+        ArrayList<String> eastMoves = cruzMove.calculateEastMoves( board, 8 );
+        ArrayList<String> westMoves = cruzMove.calculateWestMoves( board, 8 );
         ArrayList<String> allMoves = new ArrayList<String>();
         allMoves.addAll( northEastMoves );
         allMoves.addAll( northWestMoves );

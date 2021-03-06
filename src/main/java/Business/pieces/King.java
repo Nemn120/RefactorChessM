@@ -1,5 +1,6 @@
 package Business.pieces;
 
+import Business.pieces.move.ICruzMove;
 import GUI.board.ChessGameBoard;
 
 import javax.swing.*;
@@ -16,6 +17,8 @@ import java.util.ArrayList;
  */
 public class King
     extends ChessGamePiece{
+    
+    ICruzMove cruzMove;
     // ----------------------------------------------------------
     /**
      * Create a new King object.
@@ -46,10 +49,10 @@ public class King
         ArrayList<String> northWestMoves = calculateNorthWestMoves( board, 1 );
         ArrayList<String> southEastMoves = calculateSouthEastMoves( board, 1 );
         ArrayList<String> southWestMoves = calculateSouthWestMoves( board, 1 );
-        ArrayList<String> northMoves = calculateNorthMoves( board, 1 );
-        ArrayList<String> southMoves = calculateSouthMoves( board, 1 );
-        ArrayList<String> eastMoves = calculateEastMoves( board, 1 );
-        ArrayList<String> westMoves = calculateWestMoves( board, 1 );
+        ArrayList<String> northMoves = cruzMove.calculateNorthMoves( board, 1 );
+        ArrayList<String> southMoves = cruzMove.calculateSouthMoves( board, 1 );
+        ArrayList<String> eastMoves = cruzMove.calculateEastMoves( board, 1 );
+        ArrayList<String> westMoves = cruzMove.calculateWestMoves( board, 1 );
         ArrayList<String> allMoves = new ArrayList<String>();
         allMoves.addAll( northEastMoves );
         allMoves.addAll( northWestMoves );
