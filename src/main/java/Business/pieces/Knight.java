@@ -102,21 +102,7 @@ public class Knight
      */
     @Override
     public ImageIcon createImageByPieceType(){
-        if ( getColorOfPiece() == ChessGamePiece.WHITE ){
-            return new ImageIcon(
-                getClass().getResource("/ChessImages/WhiteKnight.gif")
-            );            
-        }
-        else if ( getColorOfPiece() == ChessGamePiece.BLACK ){
-            return new ImageIcon(
-                getClass().getResource("/ChessImages/BlackKnight.gif")
-            );            
-        }
-        else
-        {
-            return new ImageIcon(
-                getClass().getResource("/ChessImages/default-Unassigned.gif")
-            );            
-        }
+        String nameClass = this.getClass().getName();
+        return ChessGamePiece.getImageIcon(nameClass,getColorOfPiece());
     }
 }
