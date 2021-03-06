@@ -1,5 +1,6 @@
 package Business.pieces;
 
+import Business.pieces.service.IPieceImage;
 import GUI.board.ChessGameBoard;
 
 import javax.swing.*;
@@ -16,7 +17,7 @@ import java.util.ArrayList;
  * @version 2010.11.17
  */
 public class Queen
-    extends ChessGamePiece{
+    extends ChessGamePiece implements IPieceImage {
     // ----------------------------------------------------------
     /**
      * Create a new Queen object.
@@ -32,6 +33,7 @@ public class Queen
      */
     public Queen(ChessGameBoard board, int row, int col, int color ){
         super( board, row, col, color );
+        pieceImage=createImageByPieceType();
     }
     /**
      * Calculates the possible moves for this Queen.
@@ -64,6 +66,8 @@ public class Queen
      *
      * @return ImageIcon the ImageIcon representation of this piece.
      */
+
+
     @Override
     public ImageIcon createImageByPieceType(){
         if ( getColorOfPiece() == ChessGamePiece.WHITE ){
@@ -83,4 +87,5 @@ public class Queen
             ); 
         }
     }
+
 }

@@ -1,5 +1,6 @@
 package Business.pieces;
 
+import Business.pieces.service.IPieceImage;
 import GUI.board.ChessGameBoard;
 
 import javax.swing.*;
@@ -14,7 +15,7 @@ import java.util.ArrayList;
  * @author Danielle Bushrow (dbushrow)
  * @version 2010.11.17
  */
-public class Bishop extends ChessGamePiece{
+public class Bishop extends ChessGamePiece implements IPieceImage{
     /**
      * Creates a new Bishop object.
      * 
@@ -29,6 +30,7 @@ public class Bishop extends ChessGamePiece{
      */
     public Bishop(ChessGameBoard board, int row, int col, int color ){
         super( board, row, col, color );
+        pieceImage=createImageByPieceType();
     }
     /**
      * Calculates the possible moves for this piece. These are ALL the possible

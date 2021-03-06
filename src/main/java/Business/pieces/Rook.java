@@ -1,5 +1,6 @@
 package Business.pieces;
 
+import Business.pieces.service.IPieceImage;
 import GUI.board.ChessGameBoard;
 
 import javax.swing.*;
@@ -15,7 +16,7 @@ import java.util.ArrayList;
  * @version 2010.11.17
  */
 public class Rook
-    extends ChessGamePiece{
+    extends ChessGamePiece implements IPieceImage{
     // private ArrayList<String> possibleMoves;
     // ----------------------------------------------------------
     /**
@@ -32,6 +33,7 @@ public class Rook
      */
     public Rook( ChessGameBoard board, int row, int col, int color ){
         super( board, row, col, color );
+        pieceImage=createImageByPieceType();
     }
     /**
      * Calculates the possible moves for this Rook.

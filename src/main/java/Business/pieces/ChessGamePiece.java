@@ -1,6 +1,7 @@
 package Business.pieces;
 
 import Business.game.ChessGameEngine;
+import Business.pieces.service.IPieceImage;
 import GUI.ChessGraveyard;
 import GUI.ChessPanel;
 import GUI.board.ChessGameBoard;
@@ -24,7 +25,8 @@ import java.util.ArrayList;
 public abstract class ChessGamePiece {
     private boolean skipMoveGeneration;
     private int pieceColor;
-    private ImageIcon pieceImage;
+
+    protected ImageIcon pieceImage;
     /**
      * The list of possible moves for this piece. Updated when actions involving
      * this piece occur. (created, moved, selected, etc)
@@ -67,7 +69,7 @@ public abstract class ChessGamePiece {
             int pieceColor) {
         skipMoveGeneration = false;
         this.pieceColor = pieceColor;
-        pieceImage = createImageByPieceType();
+
         pieceRow = row;
         pieceColumn = col;
         if (board.getCell(row, col) != null) {
@@ -96,7 +98,7 @@ public abstract class ChessGamePiece {
             boolean skipMoveGeneration) {
         this.skipMoveGeneration = skipMoveGeneration;
         this.pieceColor = pieceColor;
-        pieceImage = this.createImageByPieceType();
+
         pieceRow = row;
         pieceColumn = col;
         if (board.getCell(row, col) != null) {
@@ -381,16 +383,17 @@ public abstract class ChessGamePiece {
      * @return ImageIcon the image that represents this game piece, different
      * for each piece.
      */
-    public abstract ImageIcon createImageByPieceType();
+
+    //public abstract ImageIcon createImageByPieceType();----------------------
 
     /**
      * Return the ImageIcon as an Image.
      *
      * @return ImageIcon The ImageIcon as an Image
      */
-    public ImageIcon getImage() {
-        return pieceImage;
-    }
+
+    public ImageIcon getImage() { return pieceImage; }
+
     // ----------------------------------------------------------
 
     /**

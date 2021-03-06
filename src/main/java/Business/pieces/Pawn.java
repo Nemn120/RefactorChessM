@@ -1,5 +1,6 @@
 package Business.pieces;
 
+import Business.pieces.service.IPieceImage;
 import GUI.board.ChessGameBoard;
 
 import javax.swing.*;
@@ -17,7 +18,7 @@ import java.util.ArrayList;
  * @version 2010.11.17
  */
 public class Pawn
-    extends ChessGamePiece{
+    extends ChessGamePiece implements IPieceImage {
     private boolean notMoved;
     // ----------------------------------------------------------
     /**
@@ -33,7 +34,8 @@ public class Pawn
      *            either GamePiece.WHITE, BLACK, or UNASSIGNED
      */
     public Pawn(ChessGameBoard board, int row, int col, int color ){
-        super( board, row, col, color, true );
+        super( board, row, col, color);
+        pieceImage=createImageByPieceType();
         notMoved = true;
         possibleMoves = calculatePossibleMoves( board );
     }

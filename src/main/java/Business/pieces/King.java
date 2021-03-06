@@ -1,5 +1,6 @@
 package Business.pieces;
 
+import Business.pieces.service.IPieceImage;
 import GUI.board.ChessGameBoard;
 
 import javax.swing.*;
@@ -15,7 +16,7 @@ import java.util.ArrayList;
  * @version 2010.11.17
  */
 public class King
-    extends ChessGamePiece{
+    extends ChessGamePiece implements IPieceImage{
     // ----------------------------------------------------------
     /**
      * Create a new King object.
@@ -30,7 +31,9 @@ public class King
      *            either GamePiece.WHITE, BLACK, or UNASSIGNED
      */
     public King( ChessGameBoard board, int row, int col, int color ){
+
         super( board, row, col, color, false );
+        pieceImage=createImageByPieceType();
     }
     /**
      * Calculates the possible moves for this piece. These are ALL the possible
