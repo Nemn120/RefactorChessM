@@ -1,6 +1,7 @@
 package GUI.board;
 
 import Business.pieces.ChessGamePiece;
+import Business.pieces.move.impl.GeneralMove;
 
 import javax.swing.*;
 // -------------------------------------------------------------------------
@@ -17,7 +18,7 @@ public class BoardSquare
     extends JPanel{
     private int            row;
     private int            col;
-    private ChessGamePiece piece;
+    private GeneralMove piece;
     private JLabel         imageLabel;
     // ----------------------------------------------------------
     /**
@@ -30,7 +31,7 @@ public class BoardSquare
      * @param piece
      *            the game piece
      */
-    public BoardSquare(int row, int col, ChessGamePiece piece ){
+    public BoardSquare(int row, int col, GeneralMove piece ){
         super();
         this.row = row;
         this.col = col;
@@ -76,18 +77,18 @@ public class BoardSquare
      *
      * @return GamePiece the piece
      */
-    public ChessGamePiece getPieceOnSquare(){
+    public GeneralMove getPieceOnSquare(){
         return piece;
     }
     // ----------------------------------------------------------
     /**
      * Sets the piece on this square
      *
-     * @param p
+     * @param generalMove
      *            the piece
      */
-    public void setPieceOnSquare( ChessGamePiece p ){
-        piece = p;
+    public void setPieceOnSquare( GeneralMove generalMove ){
+        piece = generalMove;
         updateImage();
     }
     // ----------------------------------------------------------

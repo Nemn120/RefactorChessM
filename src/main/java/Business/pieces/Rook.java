@@ -3,6 +3,9 @@ package Business.pieces;
 import GUI.board.ChessGameBoard;
 
 import javax.swing.*;
+
+import Business.pieces.move.impl.GeneralMove;
+
 import java.util.ArrayList;
 // -------------------------------------------------------------------------
 
@@ -15,7 +18,7 @@ import java.util.ArrayList;
  * @version 2010.11.17
  */
 public class Rook
-    extends ChessGamePiece{
+    extends GeneralMove{
     // private ArrayList<String> possibleMoves;
     // ----------------------------------------------------------
     /**

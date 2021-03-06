@@ -1,6 +1,7 @@
 package GUI.board;
 
 import Business.pieces.*;
+import Business.pieces.move.impl.GeneralMove;
 import GUI.ChessPanel;
 
 import javax.swing.*;
@@ -78,8 +79,8 @@ public class ChessGameBoard extends JPanel{
      *
      * @return ArrayList<GamePiece> the pieces
      */
-    public ArrayList<ChessGamePiece> getAllWhitePieces(){
-        ArrayList<ChessGamePiece> whitePieces = new ArrayList<ChessGamePiece>();
+    public ArrayList<GeneralMove> getAllWhitePieces(){
+        ArrayList<GeneralMove> whitePieces = new ArrayList<GeneralMove>();
         for ( int i = 0; i < 8; i++ ){
             for ( int j = 0; j < 8; j++ ){
                 if ( chessCells[i][j].getPieceOnSquare() != null
@@ -97,8 +98,8 @@ public class ChessGameBoard extends JPanel{
      *
      * @return ArrayList<GamePiece> the pieces
      */
-    public ArrayList<ChessGamePiece> getAllBlackPieces(){
-        ArrayList<ChessGamePiece> blackPieces = new ArrayList<ChessGamePiece>();
+    public ArrayList<GeneralMove> getAllBlackPieces(){
+        ArrayList<GeneralMove> blackPieces = new ArrayList<GeneralMove>();
         for ( int i = 0; i < 8; i++ ){
             for ( int j = 0; j < 8; j++ ){
                 if ( chessCells[i][j].getPieceOnSquare() != null
@@ -164,7 +165,7 @@ public class ChessGameBoard extends JPanel{
         resetBoard( false );
         for ( int i = 0; i < chessCells.length; i++ ){
             for ( int j = 0; j < chessCells[0].length; j++ ){
-                ChessGamePiece pieceToAdd;
+            	GeneralMove pieceToAdd;
                 if ( i == 1 ) // black pawns
                 {
                     pieceToAdd = new Pawn( this, i, j, ChessGamePiece.BLACK );
