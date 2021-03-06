@@ -106,23 +106,17 @@ public abstract class ChessGamePiece {
             possibleMoves = calculatePossibleMoves(board);
         }
     }
-    public static ImageIcon getImageIcon(String namePiece,int colorOfPiece){
-        namePiece = namePiece.substring(16);
+    public static String getUrlResourceByPiece(String namePiece,int colorOfPiece){
+        namePiece = namePiece.substring(16);//Remove "Business.pieces." of namePiece
         if ( colorOfPiece == ChessGamePiece.WHITE ){
-            return new ImageIcon(
-                ChessGamePiece.class.getResource("/ChessImages/White"+namePiece+".gif")
-            );            
+            return "/ChessImages/White"+namePiece+".gif";           
         }
         else if ( colorOfPiece == ChessGamePiece.BLACK ){
-            return new ImageIcon(
-                ChessGamePiece.class.getResource("/ChessImages/Black"+namePiece+".gif")
-            );            
+            return "/ChessImages/Black"+namePiece+".gif";           
         }
         else
         {
-            return new ImageIcon(
-                ChessGamePiece.class.getResource("/ChessImages/default-Unassigned.gif")
-            );           
+            return "/ChessImages/default-Unassigned.gif";         
         }
     }
     // ----------------------------------------------------------

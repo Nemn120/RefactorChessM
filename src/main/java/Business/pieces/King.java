@@ -78,21 +78,7 @@ public class King
      */
     @Override
     public ImageIcon createImageByPieceType(){
-        if ( getColorOfPiece() == ChessGamePiece.WHITE ){
-            return new ImageIcon(
-                getClass().getResource("/ChessImages/WhiteKing.gif")
-            );            
-        }
-        else if ( getColorOfPiece() == ChessGamePiece.BLACK ){
-            return new ImageIcon(
-                getClass().getResource("/ChessImages/BlackKing.gif" )
-            );            
-        }
-        else
-        {
-            return new ImageIcon(
-                getClass().getResource("/ChessImages/default-Unassigned.gif" )
-            );            
-        }
+        return new ImageIcon(
+            getClass().getResource(ChessGamePiece.getUrlResourceByPiece(this.getClass().getName(),getColorOfPiece())));
     }
 }

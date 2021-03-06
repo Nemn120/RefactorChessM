@@ -129,7 +129,7 @@ public class Pawn
      */
     @Override
     public ImageIcon createImageByPieceType(){
-        String nameClass = this.getClass().getName();
-        return ChessGamePiece.getImageIcon(nameClass,getColorOfPiece());
+        return new ImageIcon(
+            getClass().getResource(ChessGamePiece.getUrlResourceByPiece(this.getClass().getName(),getColorOfPiece())));
     }
 }
