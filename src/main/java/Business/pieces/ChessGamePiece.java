@@ -327,6 +327,11 @@ public abstract class ChessGamePiece {
         }
         return moves;
     }
+
+    private ArrayList<String> calculateDiagonalMove(ChessGameBoard board, int numMoves){
+        ArrayList<String> moves = calculateNorthEastMoves(board, numMoves);
+        return moves;
+    }
     // ----------------------------------------------------------
 
     /**
@@ -711,4 +716,5 @@ public abstract class ChessGamePiece {
         return this.getClass().toString().substring(6) + " @ (" + pieceRow
                 + ", " + pieceColumn + ")";
     }
+
 }
