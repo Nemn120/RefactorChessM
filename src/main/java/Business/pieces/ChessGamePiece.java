@@ -1,6 +1,7 @@
 package Business.pieces;
 
 import Business.Service.Moves.ColorOfPiece;
+import Business.Service.Moves.IsEnemy;
 import Business.game.ChessGameEngine;
 import GUI.ChessGraveyard;
 import GUI.ChessPanel;
@@ -25,6 +26,7 @@ import java.util.ArrayList;
 public abstract class ChessGamePiece {
     private boolean skipMoveGeneration;
     private ColorOfPiece colorOfPiece;
+    protected IsEnemy isEnemy;
     private ImageIcon pieceImage;
     /**
      * The list of possible moves for this piece. Updated when actions involving
@@ -64,6 +66,7 @@ public abstract class ChessGamePiece {
     public ChessGamePiece(ChessGameBoard board, int row, int col, int pieceColor) {
         skipMoveGeneration = false;
         this.colorOfPiece = new ColorOfPiece(pieceColor);
+        this.isEnemy=new IsEnemy(pieceColor);
         pieceImage = createImageByPieceType();
         pieceRow = row;
         pieceColumn = col;
@@ -87,6 +90,7 @@ public abstract class ChessGamePiece {
     public ChessGamePiece(ChessGameBoard board, int row, int col, int pieceColor, boolean skipMoveGeneration) {
         this.skipMoveGeneration = skipMoveGeneration;
         this.colorOfPiece = new ColorOfPiece(pieceColor);
+        this.isEnemy = new IsEnemy(pieceColor);
         pieceImage = this.createImageByPieceType();
         pieceRow = row;
         pieceColumn = col;
@@ -142,10 +146,10 @@ public abstract class ChessGamePiece {
         if (isPieceOnScreen()) {
             for (int i = pieceRow + 1; i < 8 && count < numMoves; i++) {
                 if ((board.getCell(i, pieceColumn).getPieceOnSquare()
-                        == null || isEnemy(board, i, pieceColumn))) {
+                        == null || isEnemy.invoke(board, i, pieceColumn))) {
                     moves.add(i + "," + pieceColumn);
                     count++;
-                    if (isEnemy(board, i, pieceColumn)) {
+                    if (isEnemy.invoke(board, i, pieceColumn)) {
                         break;
                     }
                 } else {
@@ -171,10 +175,10 @@ public abstract class ChessGamePiece {
         if (isPieceOnScreen()) {
             for (int i = pieceRow - 1; i >= 0 && count < numMoves; i--) {
                 if ((board.getCell(i, pieceColumn).getPieceOnSquare()
-                        == null || isEnemy(board, i, pieceColumn))) {
+                        == null || isEnemy.invoke(board, i, pieceColumn))) {
                     moves.add(i + "," + pieceColumn);
                     count++;
-                    if (isEnemy(board, i, pieceColumn)) {
+                    if (isEnemy.invoke(board, i, pieceColumn)) {
                         break;
                     }
                 } else {
@@ -199,10 +203,10 @@ public abstract class ChessGamePiece {
         if (isPieceOnScreen()) {
             for (int i = pieceColumn + 1; i < 8 && count < numMoves; i++) {
                 if ((board.getCell(pieceRow, i).getPieceOnSquare()
-                        == null || isEnemy(board, pieceRow, i))) {
+                        == null || isEnemy.invoke(board, pieceRow, i))) {
                     moves.add(pieceRow + "," + i);
                     count++;
-                    if (isEnemy(board, pieceRow, i)) {
+                    if (isEnemy.invoke(board, pieceRow, i)) {
                         break;
                     }
                 } else {
@@ -227,10 +231,10 @@ public abstract class ChessGamePiece {
         if (isPieceOnScreen()) {
             for (int i = pieceColumn - 1; i >= 0 && count < numMoves; i--) {
                 if ((board.getCell(pieceRow, i).getPieceOnSquare()
-                        == null || isEnemy(board, pieceRow, i))) {
+                        == null || isEnemy.invoke(board, pieceRow, i))) {
                     moves.add(pieceRow + "," + i);
                     count++;
-                    if (isEnemy(board, pieceRow, i)) {
+                    if (isEnemy.invoke(board, pieceRow, i)) {
                         break;
                     }
                 } else {
@@ -259,7 +263,7 @@ public abstract class ChessGamePiece {
                         pieceColumn - i).getPieceOnSquare() == null)) {
                     moves.add((pieceRow - i) + "," + (pieceColumn - i));
                     count++;
-                } else if (isEnemy(board, pieceRow - i, pieceColumn - i)) {
+                } else if (isEnemy.invoke(board, pieceRow - i, pieceColumn - i)) {
                     moves.add((pieceRow - i) + "," + (pieceColumn - i));
                     count++;
                     break;
@@ -289,7 +293,7 @@ public abstract class ChessGamePiece {
                         pieceColumn + i).getPieceOnSquare() == null)) {
                     moves.add((pieceRow - i) + "," + (pieceColumn + i));
                     count++;
-                } else if (isEnemy(board, pieceRow - i, pieceColumn + i)) {
+                } else if (isEnemy.invoke(board, pieceRow - i, pieceColumn + i)) {
                     moves.add((pieceRow - i) + "," + (pieceColumn + i));
                     count++;
                     break;
@@ -319,7 +323,7 @@ public abstract class ChessGamePiece {
                         pieceColumn - i).getPieceOnSquare() == null)) {
                     moves.add((pieceRow + i) + "," + (pieceColumn - i));
                     count++;
-                } else if (isEnemy(board, pieceRow + i, pieceColumn - i)) {
+                } else if (isEnemy.invoke(board, pieceRow + i, pieceColumn - i)) {
                     moves.add((pieceRow + i) + "," + (pieceColumn - i));
                     count++;
                     break;
@@ -350,7 +354,7 @@ public abstract class ChessGamePiece {
                         pieceColumn + i).getPieceOnSquare() == null)) {
                     moves.add((pieceRow + i) + "," + (pieceColumn + i));
                     count++;
-                } else if (isEnemy(board, pieceRow + i, pieceColumn + i)) {
+                } else if (isEnemy.invoke(board, pieceRow + i, pieceColumn + i)) {
                     moves.add((pieceRow + i) + "," + (pieceColumn + i));
                     count++;
                     break;
@@ -420,7 +424,7 @@ public abstract class ChessGamePiece {
         if (canMove(board, row, col)) {
             String moveLog = this.toString() + " -> ";
             board.clearCell(pieceRow, pieceColumn);
-            if (isEnemy(board, row, col)) {
+            if (isEnemy.invoke(board, row, col)) {
                 ChessGraveyard graveyard;
                 ChessGameEngine gameEngine =
                         ((ChessPanel) board.getParent()).getGameEngine();
@@ -547,7 +551,7 @@ public abstract class ChessGamePiece {
                 int col = Integer.parseInt(currCoords[1]);
                 if (canMove(board, row, col)) // only show legal moves
                 {
-                    if (isEnemy(board, row, col)) {
+                    if (isEnemy.invoke(board, row, col)) {
                         board.getCell(row, col).setBackground(
                                 Color.YELLOW);
                     } else {
@@ -579,44 +583,6 @@ public abstract class ChessGamePiece {
             return false;
         }
         return false;
-    }
-
-    /**
-     * Determines if the row and column contains an enemy piece. This is defined
-     * in GamePiece and not ChessGameBoard because different pieces have
-     * different enemies depending on their colors.
-     *
-     * @param row   row of the GamePiece
-     * @param col   column of the GamePiece
-     * @param board the board to check
-     * @return true if it is an enemy piece, false if not
-     */
-    public boolean isEnemy(ChessGameBoard board, int row, int col) {
-        if (row > 7 || col > 7 || row < 0 || col < 0) {
-            return false;
-        }
-        ChessGamePiece enemyPiece =
-                board.getCell(row, col).getPieceOnSquare() == null
-                        ? null
-                        : board.getCell(row, col).getPieceOnSquare();
-        if (enemyPiece == null
-                || this.getColorOfPiece().getColor() == ChessGamePiece.UNASSIGNED
-                || enemyPiece.getColorOfPiece().getColor() == ChessGamePiece.UNASSIGNED) {
-            return false;
-        }
-        if (this.getColorOfPiece().getColor() == ChessGamePiece.WHITE) {
-            if (enemyPiece.getColorOfPiece().getColor() == ChessGamePiece.BLACK) {
-                return true;
-            } else {
-                return false;
-            }
-        } else {
-            if (enemyPiece.getColorOfPiece().getColor() == ChessGamePiece.WHITE) {
-                return true;
-            } else {
-                return false;
-            }
-        }
     }
 
     /**
