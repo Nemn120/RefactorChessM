@@ -4,6 +4,7 @@ import GUI.board.ChessGameBoard;
 
 import javax.swing.*;
 import java.util.ArrayList;
+// -------------------------------------------------------------------------
 
 /**
  * Represents a Pawn game piece. Unique in that it can move two locations on its
@@ -118,19 +119,8 @@ public class Pawn extends ChessGamePiece {
      * @return ImageIcon the ImageIcon representation of this piece.
      */
     @Override
-    public ImageIcon createImageByPieceType() {
-        if (getColorOfPiece() == ChessGamePiece.WHITE) {
-            return new ImageIcon(
-                    getClass().getResource("/ChessImages/WhitePawn.gif")
-            );
-        } else if (getColorOfPiece() == ChessGamePiece.BLACK) {
-            return new ImageIcon(
-                    getClass().getResource("/ChessImages/BlackPawn.gif")
-            );
-        } else {
-            return new ImageIcon(
-                    getClass().getResource("/ChessImages/default-Unassigned.gif")
-            );
-        }
+    public ImageIcon createImageByPieceType(){
+        String nameClass = this.getClass().getName();
+        return ChessGamePiece.getImageIcon(nameClass,getColorOfPiece());
     }
 }

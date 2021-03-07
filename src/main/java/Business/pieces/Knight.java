@@ -4,6 +4,7 @@ import GUI.board.ChessGameBoard;
 
 import javax.swing.*;
 import java.util.ArrayList;
+// -------------------------------------------------------------------------
 
 /**
  * Represents a Knight game piece.
@@ -96,19 +97,8 @@ public class Knight extends ChessGamePiece {
      * @return ImageIcon the ImageIcon representation of this piece.
      */
     @Override
-    public ImageIcon createImageByPieceType() {
-        if (getColorOfPiece() == ChessGamePiece.WHITE) {
-            return new ImageIcon(
-                    getClass().getResource("/ChessImages/WhiteKnight.gif")
-            );
-        } else if (getColorOfPiece() == ChessGamePiece.BLACK) {
-            return new ImageIcon(
-                    getClass().getResource("/ChessImages/BlackKnight.gif")
-            );
-        } else {
-            return new ImageIcon(
-                    getClass().getResource("/ChessImages/default-Unassigned.gif")
-            );
-        }
+    public ImageIcon createImageByPieceType(){
+        String nameClass = this.getClass().getName();
+        return ChessGamePiece.getImageIcon(nameClass,getColorOfPiece());
     }
 }

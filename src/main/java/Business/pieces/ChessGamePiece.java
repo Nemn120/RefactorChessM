@@ -96,6 +96,25 @@ public abstract class ChessGamePiece {
             possibleMoves = calculatePossibleMoves(board);
         }
     }
+    public static ImageIcon getImageIcon(String namePiece,int colorOfPiece){
+        namePiece = namePiece.substring(16);
+        if ( colorOfPiece == ChessGamePiece.WHITE ){
+            return new ImageIcon(
+                ChessGamePiece.class.getResource("/ChessImages/White"+namePiece+".gif")
+            );
+        }
+        else if ( colorOfPiece == ChessGamePiece.BLACK ){
+            return new ImageIcon(
+                ChessGamePiece.class.getResource("/ChessImages/Black"+namePiece+".gif")
+            );
+        }
+        else
+        {
+            return new ImageIcon(
+                ChessGamePiece.class.getResource("/ChessImages/default-Unassigned.gif")
+            );
+        }
+    }
 
     /**
      * Generates and returns a list of Strings that represent possible move
