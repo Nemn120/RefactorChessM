@@ -99,6 +99,6 @@ public class Knight extends ChessGamePiece {
     @Override
     public ImageIcon createImageByPieceType(){
         String nameClass = this.getClass().getName();
-        return ChessGamePiece.getImageIcon(nameClass,getColorOfPiece());
+        return ChessGamePiece.getImageIcon(nameClass,getColorOfPiece().getColor());
     }
 }

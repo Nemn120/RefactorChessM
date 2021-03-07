@@ -47,13 +47,13 @@ public class Pawn extends ChessGamePiece {
         if (super.move(board, row, col)) {
             notMoved = false;
             possibleMoves = calculatePossibleMoves(board);
-            if ((getColorOfPiece() == ChessGamePiece.BLACK && row == 7)
-                    || (getColorOfPiece() == ChessGamePiece.WHITE && row == 0)) { // pawn has reached the end of the board, promote it to queen
+            if ((getColorOfPiece().getColor() == ChessGamePiece.BLACK && row == 7)
+                    || (getColorOfPiece().getColor() == ChessGamePiece.WHITE && row == 0)) { // pawn has reached the end of the board, promote it to queen
                 board.getCell(row, col).setPieceOnSquare(new Queen(
                         board,
                         row,
                         col,
-                        getColorOfPiece()));
+                        getColorOfPiece().getColor()));
             }
             return true;
         }
@@ -72,7 +72,7 @@ public class Pawn extends ChessGamePiece {
         ArrayList<String> moves = new ArrayList<String>();
         if (isPieceOnScreen()) {
             int currRow =
-                    getColorOfPiece() == ChessGamePiece.WHITE
+                    getColorOfPiece().getColor() == ChessGamePiece.WHITE
                             ? (pieceRow - 1)
                             : (pieceRow + 1);
             int count = 1;
@@ -88,13 +88,13 @@ public class Pawn extends ChessGamePiece {
                     break;
                 }
                 currRow =
-                        (getColorOfPiece() == ChessGamePiece.WHITE)
+                        (getColorOfPiece().getColor() == ChessGamePiece.WHITE)
                                 ? (currRow - 1)
                                 : (currRow + 1);
                 count++;
             }
             // check for enemy capture points
-            if (getColorOfPiece() == ChessGamePiece.WHITE) {
+            if (getColorOfPiece().getColor() == ChessGamePiece.WHITE) {
                 if (isEnemy(board, pieceRow - 1, pieceColumn - 1)) {
                     moves.add((pieceRow - 1) + "," + (pieceColumn - 1));
                 }
@@ -121,6 +121,6 @@ public class Pawn extends ChessGamePiece {
     @Override
     public ImageIcon createImageByPieceType(){
         String nameClass = this.getClass().getName();
-        return ChessGamePiece.getImageIcon(nameClass,getColorOfPiece());
+        return ChessGamePiece.getImageIcon(nameClass,getColorOfPiece().getColor());
     }
 }

@@ -85,7 +85,7 @@ public class ChessGameBoard extends JPanel {
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
                 if (chessCells[i][j].getPieceOnSquare() != null
-                        && chessCells[i][j].getPieceOnSquare().getColorOfPiece() ==
+                        && chessCells[i][j].getPieceOnSquare().getColorOfPiece().getColor() ==
                         ChessGamePiece.WHITE) {
                     whitePieces.add(chessCells[i][j].getPieceOnSquare());
                 }
@@ -104,7 +104,7 @@ public class ChessGameBoard extends JPanel {
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
                 if (chessCells[i][j].getPieceOnSquare() != null
-                        && chessCells[i][j].getPieceOnSquare().getColorOfPiece() ==
+                        && chessCells[i][j].getPieceOnSquare().getColorOfPiece().getColor() ==
                         ChessGamePiece.BLACK) {
                     blackPieces.add(chessCells[i][j].getPieceOnSquare());
                 }

@@ -1,5 +1,6 @@
 package Business.pieces.move.impl;
 
+import Business.Service.Moves.ColorOfPiece;
 import Business.pieces.ChessGamePiece;
 import GUI.board.ChessGameBoard;
 
@@ -14,7 +15,7 @@ public class GeneralMove {
      */
     protected int pieceColumn;
 
-    private int pieceColor;
+    private ColorOfPiece colorOfPiece;
 
     public int getPieceRow() {
         return pieceRow;
@@ -30,14 +31,6 @@ public class GeneralMove {
 
     public void setPieceColumn(int pieceColumn) {
         this.pieceColumn = pieceColumn;
-    }
-
-    public int getPieceColor() {
-        return pieceColor;
-    }
-
-    public void setPieceColor(int pieceColor) {
-        this.pieceColor = pieceColor;
     }
 
     public GeneralMove(int pieceColumn, int pieceRow) {
@@ -65,8 +58,12 @@ public class GeneralMove {
         }
     }
 
-    public int getColorOfPiece() {
-        return pieceColor;
+    public ColorOfPiece getColorOfPiece() {
+        return colorOfPiece;
+    }
+
+    public void setColorOfPiece(ColorOfPiece colorOfPiece) {
+        this.colorOfPiece = colorOfPiece;
     }
 
     public boolean isEnemy(ChessGameBoard board, int row, int col) {
@@ -78,18 +75,18 @@ public class GeneralMove {
                         ? null
                         : board.getCell(row, col).getPieceOnSquare();
         if (enemyPiece == null
-                || this.getColorOfPiece() == ChessGamePiece.UNASSIGNED
-                || enemyPiece.getColorOfPiece() == ChessGamePiece.UNASSIGNED) {
+                || this.getColorOfPiece().getColor() == ChessGamePiece.UNASSIGNED
+                || enemyPiece.getColorOfPiece().getColor() == ChessGamePiece.UNASSIGNED) {
             return false;
         }
-        if (this.getColorOfPiece() == ChessGamePiece.WHITE) {
-            if (enemyPiece.getColorOfPiece() == ChessGamePiece.BLACK) {
+        if (this.getColorOfPiece().getColor() == ChessGamePiece.WHITE) {
+            if (enemyPiece.getColorOfPiece().getColor() == ChessGamePiece.BLACK) {
                 return true;
             } else {
                 return false;
             }
         } else {
-            if (enemyPiece.getColorOfPiece() == ChessGamePiece.WHITE) {
+            if (enemyPiece.getColorOfPiece().getColor() == ChessGamePiece.WHITE) {
                 return true;
             } else {
                 return false;
