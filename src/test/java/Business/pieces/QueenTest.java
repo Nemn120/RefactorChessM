@@ -4,24 +4,27 @@ import GUI.board.ChessGameBoard;
 import org.junit.Before;
 import org.junit.Test;
 
+import javax.swing.*;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class QueenTest {
 
-    Queen queen;
+    private Queen queen;
+
     @Before
     public void setUp(){
         ChessGameBoard chessGameBoard = new ChessGameBoard();
-        queen = new Queen(chessGameBoard,0,0,1);
-
-
+        queen = new Queen(chessGameBoard,0,0,ChessGamePiece.WHITE);
     }
 
 
     @Test
-    public void calculatePossibleMoves(){
+    public void calculateFullPossibleMoves(){
 
-
+        ImageIcon imageResult = queen.createImageByPieceType();
+        assertNotNull(imageResult);
+        assertNotNull(imageResult.getImage());
     }
 
 
