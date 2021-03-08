@@ -4,6 +4,10 @@ import Business.Service.Moves.CalculateNorthEastMoves;
 import Business.Service.Moves.CalculateNorthWestMoves;
 import Business.Service.Moves.CalculateSouthEastMoves;
 import Business.Service.Moves.CalculateSouthWestMoves;
+import Business.Service.Moves.ICalculateNorthEastMoves;
+import Business.Service.Moves.ICalculateNorthWestMoves;
+import Business.Service.Moves.ICalculateSouthEastMoves;
+import Business.Service.Moves.ICalculateSouthWestMoves;
 import GUI.board.ChessGameBoard;
 
 import javax.swing.*;
@@ -19,10 +23,10 @@ import java.util.ArrayList;
  */
 public class Queen extends ChessGamePiece {
 
-    private CalculateNorthWestMoves calculateNorthWestMoves;
-    private CalculateNorthEastMoves calculateNorthEastMoves;
-    private CalculateSouthWestMoves calculateSouthWestMoves;
-    private CalculateSouthEastMoves calculateSouthEastMoves;
+    private ICalculateNorthWestMoves calculateNorthWestMoves;
+    private ICalculateNorthEastMoves calculateNorthEastMoves;
+    private ICalculateSouthWestMoves calculateSouthWestMoves;
+    private ICalculateSouthEastMoves calculateSouthEastMoves;
 
     /**
      * Create a new Queen object.
