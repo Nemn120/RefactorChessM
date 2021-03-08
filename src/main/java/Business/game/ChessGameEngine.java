@@ -10,7 +10,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
-// -------------------------------------------------------------------------
 
 /**
  * This is the backend behind the Chess game. Handles the turn-based aspects of
@@ -22,13 +21,13 @@ import java.util.ArrayList;
  * @version 2010.11.17
  */
 public class ChessGameEngine {
+
     private ChessGamePiece currentPiece;
     private boolean firstClick;
     private int currentPlayer;
     private ChessGameBoard board;
     private King king1;
     private King king2;
-    // ----------------------------------------------------------
 
     /**
      * Create a new ChessGameEngine object. Accepts a fully-created
@@ -48,7 +47,6 @@ public class ChessGameEngine {
                         + "game has been started. Player 1 (white) will play "
                         + "against Player 2 (black). BEGIN!");
     }
-    // ----------------------------------------------------------
 
     /**
      * Resets the game to its original state.
@@ -77,7 +75,6 @@ public class ChessGameEngine {
         ((ChessPanel) board.getParent()).getGameLog().addToLog(
                 "It is now Player " + currentPlayer + "'s turn.");
     }
-    // ----------------------------------------------------------
 
     /**
      * Gets the current player. Used for determining the turn.

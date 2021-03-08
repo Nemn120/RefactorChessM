@@ -4,7 +4,6 @@ import GUI.board.ChessGameBoard;
 
 import javax.swing.*;
 import java.util.ArrayList;
-// -------------------------------------------------------------------------
 
 /**
  * Represents a King game piece.
@@ -14,9 +13,8 @@ import java.util.ArrayList;
  * @author Danielle Bushrow (dbushrow)
  * @version 2010.11.17
  */
-public class King
-    extends ChessGamePiece{
-    // ----------------------------------------------------------
+public class King extends ChessGamePiece{
+
     /**
      * Create a new King object.
      *
@@ -81,7 +79,7 @@ public class King
         if ( getColorOfPiece() == ChessGamePiece.WHITE ){
             return new ImageIcon(
                 getClass().getResource("/ChessImages/WhiteKing.gif")
-            );            
+            );
         }
         else if ( getColorOfPiece() == ChessGamePiece.BLACK ){
             return new ImageIcon(
