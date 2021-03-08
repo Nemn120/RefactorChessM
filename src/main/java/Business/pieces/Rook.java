@@ -56,11 +56,11 @@ public class Rook extends ChessGamePiece {
      */
     @Override
     public ImageIcon createImageByPieceType() {
-        if (getColorOfPiece() == ChessGamePiece.WHITE) {
+        if (getColorOfPiece().getColor() == ChessGamePiece.WHITE) {
             return new ImageIcon(
                     getClass().getResource("/ChessImages/WhiteRook.gif")
             );
-        } else if (getColorOfPiece() == ChessGamePiece.BLACK) {
+        } else if (getColorOfPiece().getColor() == ChessGamePiece.BLACK) {
             return new ImageIcon(
                     getClass().getResource("/ChessImages/BlackRook.gif")
             );

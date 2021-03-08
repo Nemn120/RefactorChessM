@@ -121,14 +121,14 @@ public class ChessGameEngine {
         }
         if (currentPlayer == 2) // black player
         {
-            if (currentPiece.getColorOfPiece() == ChessGamePiece.BLACK) {
+            if (currentPiece.getColorOfPiece().getColor() == ChessGamePiece.BLACK) {
                 return true;
             }
             return false;
         } else
         // white player
         {
-            if (currentPiece.getColorOfPiece() == ChessGamePiece.WHITE) {
+            if (currentPiece.getColorOfPiece().getColor() == ChessGamePiece.WHITE) {
                 return true;
             }
             return false;

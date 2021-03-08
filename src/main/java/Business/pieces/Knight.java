@@ -39,7 +39,7 @@ public class Knight extends ChessGamePiece {
         for (int i = 2; i >= -2; i -= 4) {
             for (int j = 1; j >= -1; j -= 2) {
                 if (isOnScreen(pieceRow + i, pieceColumn + j)
-                        && (isEnemy(board, pieceRow + i, pieceColumn + j) ||
+                        && (isEnemy.invoke(board, pieceRow + i, pieceColumn + j) ||
                         board.getCell(
                                 pieceRow + i,
                                 pieceColumn + j)
@@ -63,7 +63,7 @@ public class Knight extends ChessGamePiece {
         for (int i = 1; i >= -1; i -= 2) {
             for (int j = 2; j >= -2; j -= 4) {
                 if (isOnScreen(pieceRow + i, pieceColumn + j)
-                        && (isEnemy(board, pieceRow + i, pieceColumn + j) ||
+                        && (isEnemy.invoke(board, pieceRow + i, pieceColumn + j) ||
                         board.getCell(
                                 pieceRow + i,
                                 pieceColumn + j)
@@ -99,6 +99,6 @@ public class Knight extends ChessGamePiece {
     @Override
     public ImageIcon createImageByPieceType(){
         String nameClass = this.getClass().getName();
-        return ChessGamePiece.getImageIcon(nameClass,getColorOfPiece());
+        return ChessGamePiece.getImageIcon(nameClass,getColorOfPiece().getColor());
     }
 }
