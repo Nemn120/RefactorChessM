@@ -2,6 +2,7 @@ package Business.pieces;
 
 import Business.Service.Moves.ColorOfPiece;
 import Business.Service.Moves.IsEnemy;
+import Business.Service.Moves.IsOnScreen;
 import Business.game.ChessGameEngine;
 import GUI.ChessGraveyard;
 import GUI.ChessPanel;
@@ -143,7 +144,7 @@ public abstract class ChessGamePiece {
     protected ArrayList<String> calculateSouthMoves(ChessGameBoard board, int numMoves) {
         ArrayList<String> moves = new ArrayList<String>();
         int count = 0;
-        if (isPieceOnScreen()) {
+        if (IsOnScreen.invoke(pieceRow, pieceColumn)) {
             for (int i = pieceRow + 1; i < 8 && count < numMoves; i++) {
                 if ((board.getCell(i, pieceColumn).getPieceOnSquare()
                         == null || isEnemy.invoke(board, i, pieceColumn))) {
@@ -172,7 +173,7 @@ public abstract class ChessGamePiece {
     protected ArrayList<String> calculateNorthMoves(ChessGameBoard board, int numMoves) {
         ArrayList<String> moves = new ArrayList<String>();
         int count = 0;
-        if (isPieceOnScreen()) {
+        if (IsOnScreen.invoke(pieceRow, pieceColumn)) {
             for (int i = pieceRow - 1; i >= 0 && count < numMoves; i--) {
                 if ((board.getCell(i, pieceColumn).getPieceOnSquare()
                         == null || isEnemy.invoke(board, i, pieceColumn))) {
@@ -200,7 +201,7 @@ public abstract class ChessGamePiece {
     protected ArrayList<String> calculateEastMoves(ChessGameBoard board, int numMoves) {
         ArrayList<String> moves = new ArrayList<String>();
         int count = 0;
-        if (isPieceOnScreen()) {
+        if (IsOnScreen.invoke(pieceRow, pieceColumn)) {
             for (int i = pieceColumn + 1; i < 8 && count < numMoves; i++) {
                 if ((board.getCell(pieceRow, i).getPieceOnSquare()
                         == null || isEnemy.invoke(board, pieceRow, i))) {
@@ -228,7 +229,7 @@ public abstract class ChessGamePiece {
     protected ArrayList<String> calculateWestMoves(ChessGameBoard board, int numMoves) {
         ArrayList<String> moves = new ArrayList<String>();
         int count = 0;
-        if (isPieceOnScreen()) {
+        if (IsOnScreen.invoke(pieceRow, pieceColumn)) {
             for (int i = pieceColumn - 1; i >= 0 && count < numMoves; i--) {
                 if ((board.getCell(pieceRow, i).getPieceOnSquare()
                         == null || isEnemy.invoke(board, pieceRow, i))) {
@@ -264,31 +265,6 @@ public abstract class ChessGamePiece {
 
     public ColorOfPiece getColorOfPiece(){
         return colorOfPiece;
-    }
-
-    /**
-     * Checks if the requested location is in bounds.
-     *
-     * @param row the row to check
-     * @param col the column to check
-     * @return boolean true if the location is valid, false if not
-     */
-    public boolean isOnScreen(int row, int col) {
-        if (row >= 0 && row <= 7 && col >= 0 && col <= 7) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    /**
-     * Checks if this piece's current location is in bounds. This prevents users
-     * from trying to move pieces out of the graveyard.
-     *
-     * @return true if in bounds, false otherwise
-     */
-    public boolean isPieceOnScreen() {
-        return isOnScreen(pieceRow, pieceColumn);
     }
 
     /**
@@ -423,7 +399,7 @@ public abstract class ChessGamePiece {
      */
     public void showLegalMoves(ChessGameBoard board) {
         updatePossibleMoves(board);
-        if (isPieceOnScreen()) {
+        if (IsOnScreen.invoke(pieceRow, pieceColumn)) {
             for (String locStr : possibleMoves) {
                 String[] currCoords = locStr.split(",");
                 int row = Integer.parseInt(currCoords[0]);
@@ -449,7 +425,7 @@ public abstract class ChessGamePiece {
      */
     public boolean hasLegalMoves(ChessGameBoard board) {
         updatePossibleMoves(board);
-        if (isPieceOnScreen()) {
+        if (IsOnScreen.invoke(pieceRow, pieceColumn)) {
             for (String locStr : possibleMoves) {
                 String[] currCoords = locStr.split(",");
                 int row = Integer.parseInt(currCoords[0]);

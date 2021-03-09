@@ -1,5 +1,6 @@
 package Business.pieces;
 
+import Business.Service.Moves.IsOnScreen;
 import GUI.board.ChessGameBoard;
 
 import javax.swing.*;
@@ -38,7 +39,7 @@ public class Knight extends ChessGamePiece {
         ArrayList<String> moves = new ArrayList<String>();
         for (int i = 2; i >= -2; i -= 4) {
             for (int j = 1; j >= -1; j -= 2) {
-                if (isOnScreen(pieceRow + i, pieceColumn + j)
+                if (IsOnScreen.invoke(pieceRow + i, pieceColumn + j)
                         && (isEnemy.invoke(board, pieceRow + i, pieceColumn + j) ||
                         board.getCell(
                                 pieceRow + i,
@@ -62,7 +63,7 @@ public class Knight extends ChessGamePiece {
         ArrayList<String> moves = new ArrayList<String>();
         for (int i = 1; i >= -1; i -= 2) {
             for (int j = 2; j >= -2; j -= 4) {
-                if (isOnScreen(pieceRow + i, pieceColumn + j)
+                if (IsOnScreen.invoke(pieceRow + i, pieceColumn + j)
                         && (isEnemy.invoke(board, pieceRow + i, pieceColumn + j) ||
                         board.getCell(
                                 pieceRow + i,
@@ -84,7 +85,7 @@ public class Knight extends ChessGamePiece {
     @Override
     protected ArrayList<String> calculatePossibleMoves(ChessGameBoard board) {
         ArrayList<String> moves = new ArrayList<String>();
-        if (isPieceOnScreen()) {
+        if (IsOnScreen.invoke(pieceRow, pieceColumn)) {
             moves.addAll(calculateNorthMoves(board));
             moves.addAll(calculateSouthMoves(board));
         }

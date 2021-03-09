@@ -1,5 +1,6 @@
 package Business.pieces;
 
+import Business.Service.Moves.IsOnScreen;
 import GUI.board.ChessGameBoard;
 
 import javax.swing.*;
@@ -70,7 +71,7 @@ public class Pawn extends ChessGamePiece {
     @Override
     protected ArrayList<String> calculatePossibleMoves(ChessGameBoard board) {
         ArrayList<String> moves = new ArrayList<String>();
-        if (isPieceOnScreen()) {
+        if (IsOnScreen.invoke(pieceRow, pieceColumn)) {
             int currRow =
                     getColorOfPiece().getColor() == ChessGamePiece.WHITE
                             ? (pieceRow - 1)
@@ -80,7 +81,7 @@ public class Pawn extends ChessGamePiece {
             // check for normal moves
             while (count <= maxIter) { // only loop while we have open slots and have not passed our
                 // limit
-                if (isOnScreen(currRow, pieceColumn)
+                if (IsOnScreen.invoke(currRow, pieceColumn)
                         && board.getCell(currRow,
                         pieceColumn).getPieceOnSquare() == null) {
                     moves.add(currRow + "," + pieceColumn);
