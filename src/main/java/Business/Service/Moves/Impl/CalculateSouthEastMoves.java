@@ -1,5 +1,8 @@
-package Business.Service.Moves;
+package Business.Service.Moves.Impl;
 
+import Business.Service.Moves.ICalculateSouthEastMoves;
+import Business.Service.Moves.IsEnemy;
+import Business.Service.Moves.IsOnScreen;
 import GUI.board.ChessGameBoard;
 
 import java.util.ArrayList;
@@ -23,7 +26,7 @@ public class CalculateSouthEastMoves implements ICalculateSouthEastMoves {
      * @return ArrayList<String> the moves in this direction
      */
     @Override
-    public ArrayList<String> invoke(ChessGameBoard board, int numMoves,IsEnemy isEnemy) {
+    public ArrayList<String> invoke(ChessGameBoard board, int numMoves, IsEnemy isEnemy) {
         ArrayList<String> moves = new ArrayList<String>();
         int count = 0;
         if (IsOnScreen.invoke(pieceRow, pieceColumn)) {

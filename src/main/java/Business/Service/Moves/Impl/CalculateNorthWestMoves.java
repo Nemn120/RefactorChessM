@@ -1,21 +1,25 @@
-package Business.Service.Moves;
+package Business.Service.Moves.Impl;
 
+import Business.Service.Moves.ICalculateNorthWestMoves;
+import Business.Service.Moves.IsEnemy;
+import Business.Service.Moves.IsOnScreen;
+import Business.pieces.ChessGamePiece;
 import GUI.board.ChessGameBoard;
 
 import java.util.ArrayList;
 
-public class CalculateSouthWestMoves implements ICalculateSouthWestMoves {
+public class CalculateNorthWestMoves implements ICalculateNorthWestMoves {
 
     private int pieceRow;
     private int pieceColumn;
 
-    public CalculateSouthWestMoves(int pieceRow, int pieceColumn) {
+    public CalculateNorthWestMoves(int pieceRow, int pieceColumn) {
         this.pieceRow = pieceRow;
         this.pieceColumn = pieceColumn;
     }
 
     /**
-     * Calculates and returns moves in the south-west direction relative to this
+     * Calculates and returns moves in the north-west direction relative to this
      * piece.
      *
      * @param board    the board to calculate the moves on
@@ -26,15 +30,15 @@ public class CalculateSouthWestMoves implements ICalculateSouthWestMoves {
     public ArrayList<String> invoke(ChessGameBoard board, int numMoves, IsEnemy isEnemy) {
         ArrayList<String> moves = new ArrayList<String>();
         int count = 0;
-        if (IsOnScreen.invoke(pieceRow, pieceColumn)) {
+        if (IsOnScreen.invoke(pieceRow,pieceColumn)) {
             for (int i = 1; i < 8 && count < numMoves; i++) {
-                if (IsOnScreen.invoke(pieceRow + i, pieceColumn - i)
-                        && (board.getCell(pieceRow + i,
+                if (IsOnScreen.invoke(pieceRow - i, pieceColumn - i)
+                        && (board.getCell(pieceRow - i,
                         pieceColumn - i).getPieceOnSquare() == null)) {
-                    moves.add((pieceRow + i) + "," + (pieceColumn - i));
+                    moves.add((pieceRow - i) + "," + (pieceColumn - i));
                     count++;
-                } else if (isEnemy.invoke(board, pieceRow + i, pieceColumn - i)) {
-                    moves.add((pieceRow + i) + "," + (pieceColumn - i));
+                } else if (isEnemy.invoke(board, pieceRow - i, pieceColumn - i)) {
+                    moves.add((pieceRow - i) + "," + (pieceColumn - i));
                     count++;
                     break;
                 } else {

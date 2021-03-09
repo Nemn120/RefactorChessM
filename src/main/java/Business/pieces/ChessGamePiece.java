@@ -1,6 +1,6 @@
 package Business.pieces;
 
-import Business.Service.Moves.ColorOfPiece;
+import Business.Service.Moves.Impl.ColorOfPiece;
 import Business.Service.Moves.IsEnemy;
 import Business.Service.Moves.IsOnScreen;
 import Business.game.ChessGameEngine;
