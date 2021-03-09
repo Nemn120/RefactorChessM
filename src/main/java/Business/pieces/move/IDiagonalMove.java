@@ -1,4 +1,4 @@
 package Business.pieces.move;
 
-public interface ICruzMove {
+public class IDiagonalMove {
 }
