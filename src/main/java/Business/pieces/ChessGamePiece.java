@@ -1,8 +1,8 @@
 package Business.pieces;
 
-import Business.Service.Moves.Impl.ColorOfPiece;
-import Business.Service.Moves.IsEnemy;
-import Business.Service.Moves.IsOnScreen;
+import util.ColorOfPiece;
+import util.IsEnemy;
+import util.IsOnScreen;
 import Business.game.ChessGameEngine;
 import GUI.ChessGraveyard;
 import GUI.ChessPanel;
@@ -42,19 +42,6 @@ public abstract class ChessGamePiece {
      * The game piece's column.
      */
     protected int pieceColumn;
-    /**
-     * Represents a black piece as an int
-     */
-    public static final int BLACK = 0;
-    /**
-     * Represents a white piece as an int
-     */
-    public static final int WHITE = 1;
-    /**
-     * Represents a piece that has not been assigned a color
-     */
-    public static final int UNASSIGNED = -1;
-    // ----------------------------------------------------------
 
     /**
      * Create a new GamePiece object.
@@ -104,12 +91,12 @@ public abstract class ChessGamePiece {
     }
     public static ImageIcon getImageIcon(String namePiece,int colorOfPiece){
         namePiece = namePiece.substring(16);
-        if ( colorOfPiece == ChessGamePiece.WHITE ){
+        if ( colorOfPiece == ColorOfPiece.WHITE ){
             return new ImageIcon(
                 ChessGamePiece.class.getResource("/ChessImages/White"+namePiece+".gif")
             );
         }
-        else if ( colorOfPiece == ChessGamePiece.BLACK ){
+        else if ( colorOfPiece == ColorOfPiece.BLACK ){
             return new ImageIcon(
                 ChessGamePiece.class.getResource("/ChessImages/Black"+namePiece+".gif")
             );
@@ -449,9 +436,9 @@ public abstract class ChessGamePiece {
     public ArrayList<ChessGamePiece> getCurrentAttackers(ChessGameBoard board) {
         ArrayList<ChessGamePiece> attackers = new ArrayList<ChessGamePiece>();
         int enemyColor =
-                (this.getColorOfPiece().getColor() == ChessGamePiece.BLACK)
-                        ? ChessGamePiece.WHITE
-                        : ChessGamePiece.BLACK;
+                (this.getColorOfPiece().getColor() == ColorOfPiece.BLACK)
+                        ? ColorOfPiece.WHITE
+                        : ColorOfPiece.BLACK;
         this.updatePossibleMoves(board);
         for (int i = 0; i < board.getCells().length; i++) {
             for (int j = 0; j < board.getCells()[0].length; j++) {

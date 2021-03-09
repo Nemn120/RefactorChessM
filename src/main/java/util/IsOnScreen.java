@@ -1,4 +1,4 @@
-package Business.Service.Moves;
+package util;
 
 public class IsOnScreen {
 

@@ -3,6 +3,7 @@ package Business.pieces;
 import Business.Service.Moves.*;
 import Business.Service.Moves.Impl.*;
 import GUI.board.ChessGameBoard;
+import util.ColorOfPiece;
 
 import javax.swing.*;
 import java.util.ArrayList;
@@ -104,12 +105,12 @@ public class King extends ChessGamePiece{
      */
     @Override
     public ImageIcon createImageByPieceType(){
-        if ( getColorOfPiece().getColor() == ChessGamePiece.WHITE ){
+        if ( getColorOfPiece().getColor() == ColorOfPiece.WHITE ){
             return new ImageIcon(
                 getClass().getResource("/ChessImages/WhiteKing.gif")
             );
         }
-        else if ( getColorOfPiece().getColor() == ChessGamePiece.BLACK ){
+        else if ( getColorOfPiece().getColor() == ColorOfPiece.BLACK ){
             return new ImageIcon(
                 getClass().getResource("/ChessImages/BlackKing.gif" )
             );            

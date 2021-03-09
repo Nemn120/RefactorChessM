@@ -1,14 +1,12 @@
 package Business.pieces;
 
-import Business.Service.Moves.Impl.CalculateNorthEastMoves;
-import Business.Service.Moves.Impl.CalculateNorthWestMoves;
-import Business.Service.Moves.Impl.CalculateSouthEastMoves;
-import Business.Service.Moves.Impl.CalculateSouthWestMoves;
+import Business.Service.Moves.Impl.*;
 import Business.Service.Moves.ICalculateNorthEastMoves;
 import Business.Service.Moves.ICalculateNorthWestMoves;
 import Business.Service.Moves.ICalculateSouthEastMoves;
 import Business.Service.Moves.ICalculateSouthWestMoves;
 import GUI.board.ChessGameBoard;
+import util.ColorOfPiece;
 
 import javax.swing.*;
 import java.util.ArrayList;
@@ -78,11 +76,11 @@ public class Bishop extends ChessGamePiece {
      */
     @Override
     public ImageIcon createImageByPieceType() {
-        if (getColorOfPiece().getColor() == ChessGamePiece.WHITE) {
+        if (getColorOfPiece().getColor() == ColorOfPiece.WHITE) {
             return new ImageIcon(
                     getClass().getResource("/ChessImages/WhiteBishop.gif")
             );
-        } else if (getColorOfPiece().getColor() == ChessGamePiece.BLACK) {
+        } else if (getColorOfPiece().getColor() == ColorOfPiece.BLACK) {
             return new ImageIcon(
                     getClass().getResource("/ChessImages/BlackBishop.gif")
             );

@@ -1,5 +1,6 @@
 package Business.pieces;
 
+import util.ColorOfPiece;
 import GUI.board.ChessGameBoard;
 import org.junit.Before;
 import org.junit.Test;
@@ -15,7 +16,7 @@ public class QueenTest {
     @Before
     public void setUp(){
         ChessGameBoard chessGameBoard = new ChessGameBoard();
-        queen = new Queen(chessGameBoard,0,0,ChessGamePiece.WHITE);
+        queen = new Queen(chessGameBoard,0,0, ColorOfPiece.WHITE);
     }
 
 

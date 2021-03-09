@@ -1,9 +1,8 @@
 package Business.Service.Moves.Impl;
 
 import Business.Service.Moves.ICalculateNorthWestMoves;
-import Business.Service.Moves.IsEnemy;
-import Business.Service.Moves.IsOnScreen;
-import Business.pieces.ChessGamePiece;
+import util.IsEnemy;
+import util.IsOnScreen;
 import GUI.board.ChessGameBoard;
 
 import java.util.ArrayList;

@@ -1,6 +1,6 @@
 package Business.pieces;
 
-import Business.Service.Moves.IsOnScreen;
+import util.IsOnScreen;
 import GUI.board.ChessGameBoard;
 
 import javax.swing.*;

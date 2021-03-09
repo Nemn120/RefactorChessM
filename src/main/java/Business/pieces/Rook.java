@@ -4,11 +4,9 @@ import Business.Service.Moves.ICalculateEastMoves;
 import Business.Service.Moves.ICalculateNorthMoves;
 import Business.Service.Moves.ICalculateSouthMoves;
 import Business.Service.Moves.ICalculateWestMoves;
-import Business.Service.Moves.Impl.CalculateEastMoves;
-import Business.Service.Moves.Impl.CalculateNorthMoves;
-import Business.Service.Moves.Impl.CalculateSouthMoves;
-import Business.Service.Moves.Impl.CalculateWestMoves;
+import Business.Service.Moves.Impl.*;
 import GUI.board.ChessGameBoard;
+import util.ColorOfPiece;
 
 import javax.swing.*;
 import java.util.ArrayList;
@@ -74,11 +72,11 @@ public class Rook extends ChessGamePiece {
      */
     @Override
     public ImageIcon createImageByPieceType() {
-        if (getColorOfPiece().getColor() == ChessGamePiece.WHITE) {
+        if (getColorOfPiece().getColor() == ColorOfPiece.WHITE) {
             return new ImageIcon(
                     getClass().getResource("/ChessImages/WhiteRook.gif")
             );
-        } else if (getColorOfPiece().getColor() == ChessGamePiece.BLACK) {
+        } else if (getColorOfPiece().getColor() == ColorOfPiece.BLACK) {
             return new ImageIcon(
                     getClass().getResource("/ChessImages/BlackRook.gif")
             );

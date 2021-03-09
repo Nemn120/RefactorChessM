@@ -3,9 +3,10 @@ package Business.Service.Moves;
 import java.util.ArrayList;
 
 import GUI.board.ChessGameBoard;
+import util.IsEnemy;
 
 public interface ICalculateMove {
 	
-	public ArrayList<String> invoke(ChessGameBoard board, int numMoves, IsEnemy isEnemy);
+	ArrayList<String> invoke(ChessGameBoard board, int numMoves, IsEnemy isEnemy);
 
 }

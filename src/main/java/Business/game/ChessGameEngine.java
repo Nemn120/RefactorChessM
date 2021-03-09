@@ -1,5 +1,6 @@
 package Business.game;
 
+import util.ColorOfPiece;
 import Business.pieces.ChessGamePiece;
 import Business.pieces.King;
 import GUI.ChessPanel;
@@ -121,14 +122,14 @@ public class ChessGameEngine {
         }
         if (currentPlayer == 2) // black player
         {
-            if (currentPiece.getColorOfPiece().getColor() == ChessGamePiece.BLACK) {
+            if (currentPiece.getColorOfPiece().getColor() == ColorOfPiece.BLACK) {
                 return true;
             }
             return false;
         } else
         // white player
         {
-            if (currentPiece.getColorOfPiece().getColor() == ChessGamePiece.WHITE) {
+            if (currentPiece.getColorOfPiece().getColor() == ColorOfPiece.WHITE) {
                 return true;
             }
             return false;

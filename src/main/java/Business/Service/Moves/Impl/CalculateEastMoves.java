@@ -1,11 +1,10 @@
 package Business.Service.Moves.Impl;
 
 import Business.Service.Moves.ICalculateEastMoves;
-import Business.Service.Moves.IsEnemy;
-import Business.Service.Moves.IsOnScreen;
+import util.IsEnemy;
+import util.IsOnScreen;
 import GUI.board.ChessGameBoard;
 
-import java.awt.*;
 import java.util.ArrayList;
 
 public class CalculateEastMoves implements ICalculateEastMoves {
