@@ -4,11 +4,14 @@ import GUI.board.ChessGameBoard;
 
 import java.util.ArrayList;
 
+import Business.Service.Moves.IsEnemy;
+
 public class DiagonalMoveImpl {
 
     // ----------------------------------------------------------
 
     private GeneralMove generalMove;
+    private IsEnemy isEnemyService;
 
     public DiagonalMoveImpl(GeneralMove generalMove) {
         this.generalMove = generalMove;
@@ -34,7 +37,7 @@ public class DiagonalMoveImpl {
                         generalMove.getPieceColumn() - i).getPieceOnSquare() == null)) {
                     moves.add((generalMove.getPieceRow() + i) + "," + (generalMove.getPieceColumn() - i));
                     count++;
-                } else if (generalMove.isEnemy(board,generalMove.getPieceRow() + i, generalMove.getPieceColumn() - i)) {
+                } else if (isEnemyService.isEnemy(board,generalMove.getPieceRow() + i, generalMove.getPieceColumn() - i)) {
                     moves.add((generalMove.getPieceRow() + i) + "," + (generalMove.getPieceColumn() - i));
                     count++;
                     break;

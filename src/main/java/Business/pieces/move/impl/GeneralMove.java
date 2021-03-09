@@ -66,33 +66,7 @@ public class GeneralMove {
         this.colorOfPiece = colorOfPiece;
     }
 
-    public boolean isEnemy(ChessGameBoard board, int row, int col) {
-        if (row > 7 || col > 7 || row < 0 || col < 0) {
-            return false;
-        }
-        ChessGamePiece enemyPiece =
-                board.getCell(row, col).getPieceOnSquare() == null
-                        ? null
-                        : board.getCell(row, col).getPieceOnSquare();
-        if (enemyPiece == null
-                || this.getColorOfPiece().getColor() == ChessGamePiece.UNASSIGNED
-                || enemyPiece.getColorOfPiece().getColor() == ChessGamePiece.UNASSIGNED) {
-            return false;
-        }
-        if (this.getColorOfPiece().getColor() == ChessGamePiece.WHITE) {
-            if (enemyPiece.getColorOfPiece().getColor() == ChessGamePiece.BLACK) {
-                return true;
-            } else {
-                return false;
-            }
-        } else {
-            if (enemyPiece.getColorOfPiece().getColor() == ChessGamePiece.WHITE) {
-                return true;
-            } else {
-                return false;
-            }
-        }
-    }
+    
 
 
 

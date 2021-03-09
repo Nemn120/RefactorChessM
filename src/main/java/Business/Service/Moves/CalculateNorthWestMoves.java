@@ -5,7 +5,7 @@ import GUI.board.ChessGameBoard;
 
 import java.util.ArrayList;
 
-public class CalculateNorthWestMoves {
+public class CalculateNorthWestMoves implements ICalculateNorthWestMoves {
 
     private int pieceRow;
     private int pieceColumn;
@@ -23,6 +23,7 @@ public class CalculateNorthWestMoves {
      * @param numMoves the number of moves to calculate
      * @return ArrayList<String> the moves in this direction
      */
+    @Override
     public ArrayList<String> invoke(ChessGameBoard board, int numMoves, IsEnemy isEnemy) {
         ArrayList<String> moves = new ArrayList<String>();
         int count = 0;
