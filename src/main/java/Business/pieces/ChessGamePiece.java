@@ -11,7 +11,6 @@ import GUI.board.ChessGameBoard;
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
-// -------------------------------------------------------------------------
 
 /**
  * Abstract class that is used to represent a game piece on the chess board.
@@ -119,119 +118,6 @@ public abstract class ChessGamePiece {
      * @return ArrayList<String> the list of moves
      */
     protected abstract ArrayList<String> calculatePossibleMoves(ChessGameBoard board);
-
-    /**
-     * Calculates and returns moves in the south direction relative to this
-     * piece.
-     *
-     * @param board    the board to calculate the moves on
-     * @param numMoves the number of moves to calculate
-     * @return ArrayList<String> the calculated moves.
-     */
-    protected ArrayList<String> calculateSouthMoves(ChessGameBoard board, int numMoves) {
-        ArrayList<String> moves = new ArrayList<String>();
-        int count = 0;
-        if (IsOnScreen.invoke(pieceRow, pieceColumn)) {
-            for (int i = pieceRow + 1; i < 8 && count < numMoves; i++) {
-                if ((board.getCell(i, pieceColumn).getPieceOnSquare()
-                        == null || isEnemy.invoke(board, i, pieceColumn))) {
-                    moves.add(i + "," + pieceColumn);
-                    count++;
-                    if (isEnemy.invoke(board, i, pieceColumn)) {
-                        break;
-                    }
-                } else {
-                    break;
-                }
-            }
-        }
-        return moves;
-    }
-    // ----------------------------------------------------------
-
-    /**
-     * Calculates and returns moves in the north direction relative to this
-     * piece.
-     *
-     * @param board    the board to calculate the moves on
-     * @param numMoves the number of moves to calculate
-     * @return ArrayList<String> the moves in this direction
-     */
-    protected ArrayList<String> calculateNorthMoves(ChessGameBoard board, int numMoves) {
-        ArrayList<String> moves = new ArrayList<String>();
-        int count = 0;
-        if (IsOnScreen.invoke(pieceRow, pieceColumn)) {
-            for (int i = pieceRow - 1; i >= 0 && count < numMoves; i--) {
-                if ((board.getCell(i, pieceColumn).getPieceOnSquare()
-                        == null || isEnemy.invoke(board, i, pieceColumn))) {
-                    moves.add(i + "," + pieceColumn);
-                    count++;
-                    if (isEnemy.invoke(board, i, pieceColumn)) {
-                        break;
-                    }
-                } else {
-                    break;
-                }
-            }
-        }
-        return moves;
-    }
-
-    /**
-     * Calculates and returns moves in the east direction relative to this
-     * piece.
-     *
-     * @param board    the board to calculate the moves on
-     * @param numMoves the number of moves to calculate
-     * @return ArrayList<String> the moves in this direction
-     */
-    protected ArrayList<String> calculateEastMoves(ChessGameBoard board, int numMoves) {
-        ArrayList<String> moves = new ArrayList<String>();
-        int count = 0;
-        if (IsOnScreen.invoke(pieceRow, pieceColumn)) {
-            for (int i = pieceColumn + 1; i < 8 && count < numMoves; i++) {
-                if ((board.getCell(pieceRow, i).getPieceOnSquare()
-                        == null || isEnemy.invoke(board, pieceRow, i))) {
-                    moves.add(pieceRow + "," + i);
-                    count++;
-                    if (isEnemy.invoke(board, pieceRow, i)) {
-                        break;
-                    }
-                } else {
-                    break;
-                }
-            }
-        }
-        return moves;
-    }
-
-    /**
-     * Calculates and returns moves in the west direction relative to this
-     * piece.
-     *
-     * @param board    the board to calculate the moves on
-     * @param numMoves the number of moves to calculate
-     * @return ArrayList<String> the moves in this direction
-     */
-    protected ArrayList<String> calculateWestMoves(ChessGameBoard board, int numMoves) {
-        ArrayList<String> moves = new ArrayList<String>();
-        int count = 0;
-        if (IsOnScreen.invoke(pieceRow, pieceColumn)) {
-            for (int i = pieceColumn - 1; i >= 0 && count < numMoves; i--) {
-                if ((board.getCell(pieceRow, i).getPieceOnSquare()
-                        == null || isEnemy.invoke(board, pieceRow, i))) {
-                    moves.add(pieceRow + "," + i);
-                    count++;
-                    if (isEnemy.invoke(board, pieceRow, i)) {
-                        break;
-                    }
-                } else {
-                    break;
-                }
-            }
-        }
-        return moves;
-    }
 
     /**
      * Creates the ImageIcon by the color of the piece.

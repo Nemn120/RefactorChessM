@@ -49,14 +49,14 @@ public class Rook extends ChessGamePiece {
     @Override
     protected ArrayList<String> calculatePossibleMoves(ChessGameBoard board) {
 
-        this.calculateSouthMoves = new CalculateSouthMoves(pieceRow,pieceColumn);
-        this.calculateNorthMoves = new CalculateNorthMoves(pieceRow,pieceColumn);
-        this.calculateEastMoves = new CalculateEastMoves(pieceRow,pieceColumn);
-        this.calculateWestMoves = new CalculateWestMoves(pieceRow,pieceColumn);
-        ArrayList<String> northMoves = calculateNorthMoves(board, 8);
-        ArrayList<String> southMoves = calculateSouthMoves(board, 8);
-        ArrayList<String> westMoves = calculateWestMoves(board, 8);
-        ArrayList<String> eastMoves = calculateEastMoves(board, 8);
+        this.calculateSouthMoves = new CalculateSouthMoves(pieceRow, pieceColumn);
+        this.calculateNorthMoves = new CalculateNorthMoves(pieceRow, pieceColumn);
+        this.calculateEastMoves = new CalculateEastMoves(pieceRow, pieceColumn);
+        this.calculateWestMoves = new CalculateWestMoves(pieceRow, pieceColumn);
+        ArrayList<String> northMoves = calculateNorthMoves.invoke(board, 8, isEnemy);
+        ArrayList<String> southMoves = calculateSouthMoves.invoke(board, 8, isEnemy);
+        ArrayList<String> westMoves = calculateWestMoves.invoke(board, 8, isEnemy);
+        ArrayList<String> eastMoves = calculateEastMoves.invoke(board, 8, isEnemy);
         ArrayList<String> allMoves = new ArrayList<String>();
         allMoves.addAll(northMoves);
         allMoves.addAll(southMoves);
