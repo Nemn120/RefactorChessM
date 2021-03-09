@@ -60,11 +60,7 @@ public abstract class ChessGamePiece {
      * @param col        column of the GamePiece
      * @param pieceColor either GamePiece.WHITE, BLACK, or UNASSIGNED
      */
-    public ChessGamePiece(
-            ChessGameBoard board,
-            int row,
-            int col,
-            int pieceColor) {
+    public ChessGamePiece(ChessGameBoard board, int row, int col, int pieceColor) {
         skipMoveGeneration = false;
         this.pieceColor = pieceColor;
         pieceImage = createImageByPieceType();
@@ -75,7 +71,6 @@ public abstract class ChessGamePiece {
         }
         possibleMoves = calculatePossibleMoves(board);
     }
-    // ----------------------------------------------------------
 
     /**
      * Create a new GamePiece object. This constructor is used for special
@@ -88,12 +83,7 @@ public abstract class ChessGamePiece {
      * @param skipMoveGeneration if true, moves will not be generated in the constructor
      * @param pieceColor         either GamePiece.BLACK, WHITE, or UNASSIGNED
      */
-    public ChessGamePiece(
-            ChessGameBoard board,
-            int row,
-            int col,
-            int pieceColor,
-            boolean skipMoveGeneration) {
+    public ChessGamePiece(ChessGameBoard board, int row, int col, int pieceColor, boolean skipMoveGeneration) {
         this.skipMoveGeneration = skipMoveGeneration;
         this.pieceColor = pieceColor;
         pieceImage = this.createImageByPieceType();
@@ -106,7 +96,25 @@ public abstract class ChessGamePiece {
             possibleMoves = calculatePossibleMoves(board);
         }
     }
-    // ----------------------------------------------------------
+    public static ImageIcon getImageIcon(String namePiece,int colorOfPiece){
+        namePiece = namePiece.substring(16);
+        if ( colorOfPiece == ChessGamePiece.WHITE ){
+            return new ImageIcon(
+                ChessGamePiece.class.getResource("/ChessImages/White"+namePiece+".gif")
+            );
+        }
+        else if ( colorOfPiece == ChessGamePiece.BLACK ){
+            return new ImageIcon(
+                ChessGamePiece.class.getResource("/ChessImages/Black"+namePiece+".gif")
+            );
+        }
+        else
+        {
+            return new ImageIcon(
+                ChessGamePiece.class.getResource("/ChessImages/default-Unassigned.gif")
+            );
+        }
+    }
 
     /**
      * Generates and returns a list of Strings that represent possible move
@@ -117,8 +125,7 @@ public abstract class ChessGamePiece {
      * @param board the board to check moves on
      * @return ArrayList<String> the list of moves
      */
-    protected abstract ArrayList<String> calculatePossibleMoves(
-            ChessGameBoard board);
+    protected abstract ArrayList<String> calculatePossibleMoves(ChessGameBoard board);
 
     /**
      * Calculates and returns moves in the south direction relative to this
@@ -128,9 +135,7 @@ public abstract class ChessGamePiece {
      * @param numMoves the number of moves to calculate
      * @return ArrayList<String> the calculated moves.
      */
-    protected ArrayList<String> calculateSouthMoves(
-            ChessGameBoard board,
-            int numMoves) {
+    protected ArrayList<String> calculateSouthMoves(ChessGameBoard board, int numMoves) {
         ArrayList<String> moves = new ArrayList<String>();
         int count = 0;
         if (isPieceOnScreen()) {
@@ -149,7 +154,6 @@ public abstract class ChessGamePiece {
         }
         return moves;
     }
-    // ----------------------------------------------------------
 
     /**
      * Calculates and returns moves in the north direction relative to this
@@ -159,9 +163,7 @@ public abstract class ChessGamePiece {
      * @param numMoves the number of moves to calculate
      * @return ArrayList<String> the moves in this direction
      */
-    protected ArrayList<String> calculateNorthMoves(
-            ChessGameBoard board,
-            int numMoves) {
+    protected ArrayList<String> calculateNorthMoves(ChessGameBoard board, int numMoves) {
         ArrayList<String> moves = new ArrayList<String>();
         int count = 0;
         if (isPieceOnScreen()) {
@@ -180,7 +182,6 @@ public abstract class ChessGamePiece {
         }
         return moves;
     }
-    // ----------------------------------------------------------
 
     /**
      * Calculates and returns moves in the east direction relative to this
@@ -190,9 +191,7 @@ public abstract class ChessGamePiece {
      * @param numMoves the number of moves to calculate
      * @return ArrayList<String> the moves in this direction
      */
-    protected ArrayList<String> calculateEastMoves(
-            ChessGameBoard board,
-            int numMoves) {
+    protected ArrayList<String> calculateEastMoves(ChessGameBoard board, int numMoves) {
         ArrayList<String> moves = new ArrayList<String>();
         int count = 0;
         if (isPieceOnScreen()) {
@@ -211,7 +210,6 @@ public abstract class ChessGamePiece {
         }
         return moves;
     }
-    // ----------------------------------------------------------
 
     /**
      * Calculates and returns moves in the west direction relative to this
@@ -221,9 +219,7 @@ public abstract class ChessGamePiece {
      * @param numMoves the number of moves to calculate
      * @return ArrayList<String> the moves in this direction
      */
-    protected ArrayList<String> calculateWestMoves(
-            ChessGameBoard board,
-            int numMoves) {
+    protected ArrayList<String> calculateWestMoves(ChessGameBoard board, int numMoves) {
         ArrayList<String> moves = new ArrayList<String>();
         int count = 0;
         if (isPieceOnScreen()) {
@@ -242,7 +238,6 @@ public abstract class ChessGamePiece {
         }
         return moves;
     }
-    // ----------------------------------------------------------
 
     /**
      * Calculates and returns moves in the north-west direction relative to this
@@ -252,9 +247,7 @@ public abstract class ChessGamePiece {
      * @param numMoves the number of moves to calculate
      * @return ArrayList<String> the moves in this direction
      */
-    protected ArrayList<String> calculateNorthWestMoves(
-            ChessGameBoard board,
-            int numMoves) {
+    protected ArrayList<String> calculateNorthWestMoves(ChessGameBoard board, int numMoves) {
         ArrayList<String> moves = new ArrayList<String>();
         int count = 0;
         if (isPieceOnScreen()) {
@@ -275,7 +268,6 @@ public abstract class ChessGamePiece {
         }
         return moves;
     }
-    // ----------------------------------------------------------
 
     /**
      * Calculates and returns moves in the north-east direction relative to this
@@ -285,9 +277,7 @@ public abstract class ChessGamePiece {
      * @param numMoves the number of moves to calculate
      * @return ArrayList<String> the moves in this direction
      */
-    protected ArrayList<String> calculateNorthEastMoves(
-            ChessGameBoard board,
-            int numMoves) {
+    protected ArrayList<String> calculateNorthEastMoves(ChessGameBoard board, int numMoves) {
         ArrayList<String> moves = new ArrayList<String>();
         int count = 0;
         if (isPieceOnScreen()) {
@@ -308,7 +298,6 @@ public abstract class ChessGamePiece {
         }
         return moves;
     }
-    // ----------------------------------------------------------
 
     /**
      * Calculates and returns moves in the south-west direction relative to this
@@ -318,9 +307,7 @@ public abstract class ChessGamePiece {
      * @param numMoves the number of moves to calculate
      * @return ArrayList<String> the moves in this direction
      */
-    protected ArrayList<String> calculateSouthWestMoves(
-            ChessGameBoard board,
-            int numMoves) {
+    protected ArrayList<String> calculateSouthWestMoves(ChessGameBoard board, int numMoves) {
         ArrayList<String> moves = new ArrayList<String>();
         int count = 0;
         if (isPieceOnScreen()) {
@@ -351,9 +338,7 @@ public abstract class ChessGamePiece {
      * @param numMoves the number of moves to calculate
      * @return ArrayList<String> the moves in this direction
      */
-    protected ArrayList<String> calculateSouthEastMoves(
-            ChessGameBoard board,
-            int numMoves) {
+    protected ArrayList<String> calculateSouthEastMoves(ChessGameBoard board, int numMoves) {
         ArrayList<String> moves = new ArrayList<String>();
         int count = 0;
         if (isPieceOnScreen()) {
@@ -391,7 +376,6 @@ public abstract class ChessGamePiece {
     public ImageIcon getImage() {
         return pieceImage;
     }
-    // ----------------------------------------------------------
 
     /**
      * Gets the color of this piece.
@@ -402,7 +386,6 @@ public abstract class ChessGamePiece {
     public int getColorOfPiece() {
         return pieceColor;
     }
-    // ----------------------------------------------------------
 
     /**
      * Checks if the requested location is in bounds.
@@ -418,7 +401,6 @@ public abstract class ChessGamePiece {
             return false;
         }
     }
-    // ----------------------------------------------------------
 
     /**
      * Checks if this piece's current location is in bounds. This prevents users
@@ -495,10 +477,7 @@ public abstract class ChessGamePiece {
      * @param col   the column to move to
      * @return boolean true if the move is safe, false if it is not
      */
-    private boolean testMoveForKingSafety(
-            ChessGameBoard board,
-            int row,
-            int col) {
+    private boolean testMoveForKingSafety(ChessGameBoard board, int row, int col) {
         updatePossibleMoves(board);
         ChessGamePiece oldPieceOnOtherSquare =
                 board.getCell(row, col).getPieceOnSquare();
@@ -518,7 +497,6 @@ public abstract class ChessGamePiece {
         board.getCell(row, col).setPieceOnSquare(oldPieceOnOtherSquare);
         return retVal;
     }
-    // ----------------------------------------------------------
 
     /**
      * Re-calculates the possible moves for this piece. This is called whenever
@@ -529,7 +507,6 @@ public abstract class ChessGamePiece {
     protected void updatePossibleMoves(ChessGameBoard board) {
         possibleMoves = calculatePossibleMoves(board);
     }
-    // ----------------------------------------------------------
 
     /**
      * Sets the internal piece location.
@@ -541,7 +518,6 @@ public abstract class ChessGamePiece {
         pieceRow = row;
         pieceColumn = col;
     }
-    // ----------------------------------------------------------
 
     /**
      * Returns this piece's row location.
@@ -551,7 +527,6 @@ public abstract class ChessGamePiece {
     public int getRow() {
         return pieceRow;
     }
-    // ----------------------------------------------------------
 
     /**
      * Returns this piece's column.
@@ -561,7 +536,6 @@ public abstract class ChessGamePiece {
     public int getColumn() {
         return pieceColumn;
     }
-    // ----------------------------------------------------------
 
     /**
      * Shows the legal move locations for this GamePiece.
@@ -587,7 +561,6 @@ public abstract class ChessGamePiece {
             }
         }
     }
-    // ----------------------------------------------------------
 
     /**
      * Determines if this piece has legal moves to make.
@@ -611,7 +584,6 @@ public abstract class ChessGamePiece {
         }
         return false;
     }
-    // ----------------------------------------------------------
 
     /**
      * Determines if the row and column contains an enemy piece. This is defined
@@ -650,7 +622,6 @@ public abstract class ChessGamePiece {
             }
         }
     }
-    // ----------------------------------------------------------
 
     /**
      * Gets a list of GamePieces that can currently attack this game piece.
