@@ -1,8 +1,6 @@
 package Business.pieces.move.impl;
 
-import Business.Service.Moves.ColorOfPiece;
-import Business.pieces.ChessGamePiece;
-import GUI.board.ChessGameBoard;
+import Business.Service.Moves.Impl.ColorOfPiece;
 
 public class GeneralMove {
 

@@ -1,4 +1,4 @@
-package Business.Service.Moves;
+package Business.Service.Moves.Impl;
 
 public  class ColorOfPiece {
 

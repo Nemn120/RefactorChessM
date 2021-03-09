@@ -1,13 +1,7 @@
 package Business.pieces;
 
-import Business.Service.Moves.CalculateNorthEastMoves;
-import Business.Service.Moves.CalculateNorthWestMoves;
-import Business.Service.Moves.CalculateSouthEastMoves;
-import Business.Service.Moves.CalculateSouthWestMoves;
-import Business.Service.Moves.ICalculateNorthEastMoves;
-import Business.Service.Moves.ICalculateNorthWestMoves;
-import Business.Service.Moves.ICalculateSouthEastMoves;
-import Business.Service.Moves.ICalculateSouthWestMoves;
+import Business.Service.Moves.*;
+import Business.Service.Moves.Impl.*;
 import GUI.board.ChessGameBoard;
 
 import javax.swing.*;
@@ -27,7 +21,10 @@ public class King extends ChessGamePiece{
     private ICalculateNorthEastMoves calculateNorthEastMoves;
     private ICalculateSouthWestMoves calculateSouthWestMoves;
     private ICalculateSouthEastMoves calculateSouthEastMoves;
-
+    private ICalculateSouthMoves calculateSouthMoves;
+    private ICalculateNorthMoves calculateNorthMoves;
+    private ICalculateEastMoves calculateEastMoves;
+    private ICalculateWestMoves calculateWestMoves;
     /**
      * Create a new King object.
      *
@@ -66,10 +63,19 @@ public class King extends ChessGamePiece{
         this.calculateSouthWestMoves = new CalculateSouthWestMoves(pieceRow,pieceColumn);
         ArrayList<String> southWestMoves = calculateSouthWestMoves.invoke(board, 1,isEnemy);
 
-        ArrayList<String> northMoves = calculateNorthMoves( board, 1 );
-        ArrayList<String> southMoves = calculateSouthMoves( board, 1 );
-        ArrayList<String> eastMoves = calculateEastMoves( board, 1 );
-        ArrayList<String> westMoves = calculateWestMoves( board, 1 );
+        this.calculateSouthMoves = new CalculateSouthMoves(pieceRow,pieceColumn);
+        ArrayList<String> southMoves = calculateSouthMoves.invoke( board, 1, isEnemy );
+
+        this.calculateNorthMoves = new CalculateNorthMoves(pieceRow,pieceColumn);
+        ArrayList<String> northMoves = calculateNorthMoves.invoke(board,1,isEnemy);
+
+        this.calculateEastMoves = new CalculateEastMoves(pieceRow,pieceColumn);
+        ArrayList<String> eastMoves = calculateEastMoves.invoke(board,1,isEnemy);
+
+        this.calculateWestMoves = new CalculateWestMoves(pieceRow,pieceColumn);
+        ArrayList<String> westMoves = calculateWestMoves.invoke(board,1,isEnemy);
+
+
         ArrayList<String> allMoves = new ArrayList<String>();
         allMoves.addAll( northEastMoves );
         allMoves.addAll( northWestMoves );

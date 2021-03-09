@@ -1,9 +1,9 @@
 package Business.pieces;
 
-import Business.Service.Moves.CalculateNorthEastMoves;
-import Business.Service.Moves.CalculateNorthWestMoves;
-import Business.Service.Moves.CalculateSouthEastMoves;
-import Business.Service.Moves.CalculateSouthWestMoves;
+import Business.Service.Moves.Impl.CalculateNorthEastMoves;
+import Business.Service.Moves.Impl.CalculateNorthWestMoves;
+import Business.Service.Moves.Impl.CalculateSouthEastMoves;
+import Business.Service.Moves.Impl.CalculateSouthWestMoves;
 import Business.Service.Moves.ICalculateNorthEastMoves;
 import Business.Service.Moves.ICalculateNorthWestMoves;
 import Business.Service.Moves.ICalculateSouthEastMoves;
