@@ -1,5 +1,6 @@
 package GUI;
 
+import Business.Service.Moves.Impl.MovePiece;
 import Business.pieces.ChessGamePiece;
 
 import javax.swing.*;
@@ -32,7 +33,7 @@ public class ChessGraveyard extends JPanel {
      *
      * @param piece the GamePiece to add
      */
-    public void addPiece(ChessGamePiece piece) {
+    public void addPiece(MovePiece piece) {
         piece.setPieceLocation(-1, -1);
         JLabel pieceLabel = new JLabel();
         pieceLabel.setIcon(piece.getImage());

@@ -1,5 +1,6 @@
 package util;
 
+import Business.Service.Moves.Impl.MovePiece;
 import Business.pieces.ChessGamePiece;
 import GUI.board.ChessGameBoard;
 
@@ -25,7 +26,7 @@ public class IsEnemy {
         if (row > 7 || col > 7 || row < 0 || col < 0) {
             return false;
         }
-        ChessGamePiece enemyPiece =
+        MovePiece enemyPiece =
                 board.getCell(row, col).getPieceOnSquare() == null
                         ? null
                         : board.getCell(row, col).getPieceOnSquare();

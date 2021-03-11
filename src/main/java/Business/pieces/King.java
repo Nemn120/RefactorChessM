@@ -16,7 +16,7 @@ import java.util.ArrayList;
  * @author Danielle Bushrow (dbushrow)
  * @version 2010.11.17
  */
-public class King extends ChessGamePiece{
+public class King extends MovePiece{
 
     private ICalculateNorthWestMoves calculateNorthWestMoves;
     private ICalculateNorthEastMoves calculateNorthEastMoves;
@@ -26,6 +26,8 @@ public class King extends ChessGamePiece{
     private ICalculateNorthMoves calculateNorthMoves;
     private ICalculateEastMoves calculateEastMoves;
     private ICalculateWestMoves calculateWestMoves;
+    
+    private IConfigurationPieceMove configurationPieceMove;
     /**
      * Create a new King object.
      *
@@ -50,7 +52,7 @@ public class King extends ChessGamePiece{
      * @return ArrayList<String> the moves
      */
     @Override
-    protected ArrayList<String> calculatePossibleMoves( ChessGameBoard board ){
+    public ArrayList<String> calculatePossibleMoves( ChessGameBoard board ){
 
         this.calculateNorthEastMoves = new CalculateNorthEastMoves(pieceRow,pieceColumn);
         ArrayList<String> northEastMoves = this.calculateNorthEastMoves.invoke(board,1,isEnemy);
@@ -96,7 +98,7 @@ public class King extends ChessGamePiece{
      * @return true if checked, false if not checked
      */
     public boolean isChecked( ChessGameBoard board ){
-        return getCurrentAttackers( board ).size() > 0;
+        return configurationPieceMove.getCurrentAttackers( board ).size() > 0;
     }
     /**
      * Creates an icon for this piece depending on the piece's color.

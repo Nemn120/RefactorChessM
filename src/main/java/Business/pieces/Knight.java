@@ -4,6 +4,9 @@ import util.IsOnScreen;
 import GUI.board.ChessGameBoard;
 
 import javax.swing.*;
+
+import Business.Service.Moves.Impl.MovePiece;
+
 import java.util.ArrayList;
 // -------------------------------------------------------------------------
 
@@ -15,7 +18,7 @@ import java.util.ArrayList;
  * @author Danielle Bushrow (dbushrow)
  * @version 2010.11.17
  */
-public class Knight extends ChessGamePiece {
+public class Knight extends MovePiece {
     /**
      * Knight constructor for gamePiece
      *
@@ -83,7 +86,7 @@ public class Knight extends ChessGamePiece {
      * @return ArrayList<String> the list of possible moves
      */
     @Override
-    protected ArrayList<String> calculatePossibleMoves(ChessGameBoard board) {
+    public ArrayList<String> calculatePossibleMoves(ChessGameBoard board) {
         ArrayList<String> moves = new ArrayList<String>();
         if (IsOnScreen.invoke(pieceRow, pieceColumn)) {
             moves.addAll(calculateNorthMoves(board));
@@ -100,6 +103,6 @@ public class Knight extends ChessGamePiece {
     @Override
     public ImageIcon createImageByPieceType(){
         String nameClass = this.getClass().getName();
-        return ChessGamePiece.getImageIcon(nameClass,getColorOfPiece().getColor());
+        return MovePiece.getImageIcon(nameClass,getColorOfPiece().getColor());
     }
 }

@@ -1,6 +1,8 @@
 package Business.game;
 
 import util.ColorOfPiece;
+import Business.Service.Moves.IConfigurationPieceMove;
+import Business.Service.Moves.Impl.MovePiece;
 import Business.pieces.ChessGamePiece;
 import Business.pieces.King;
 import GUI.ChessPanel;
@@ -23,12 +25,14 @@ import java.util.ArrayList;
  */
 public class ChessGameEngine {
 
-    private ChessGamePiece currentPiece;
+    //private ChessGamePiece currentPiece;
+	private MovePiece movePiece;
     private boolean firstClick;
     private int currentPlayer;
     private ChessGameBoard board;
     private King king1;
     private King king2;
+    private IConfigurationPieceMove configurationPieceMove;
 
     /**
      * Create a new ChessGameEngine object. Accepts a fully-created
@@ -93,7 +97,7 @@ public class ChessGameEngine {
      * @return boolean true if the player does have legal moves, false otherwise
      */
     public boolean playerHasLegalMoves(int playerNum) {
-        ArrayList<ChessGamePiece> pieces;
+        ArrayList<MovePiece> pieces;
         if (playerNum == 1) {
             pieces = board.getAllWhitePieces();
         } else if (playerNum == 2) {
@@ -101,8 +105,8 @@ public class ChessGameEngine {
         } else {
             return false;
         }
-        for (ChessGamePiece currPiece : pieces) {
-            if (currPiece.hasLegalMoves(board)) {
+        for (MovePiece currPiece : pieces) {
+            if (currPiece.getConfigurationPieceMoveService().hasLegalMoves(board)) {
                 return true;
             }
         }
@@ -116,20 +120,20 @@ public class ChessGameEngine {
      * @return boolean true if the piece is valid, false otherwise
      */
     private boolean selectedPieceIsValid() {
-        if (currentPiece == null) // user tried to select an empty square
+        if (movePiece == null) // user tried to select an empty square
         {
             return false;
         }
         if (currentPlayer == 2) // black player
         {
-            if (currentPiece.getColorOfPiece().getColor() == ColorOfPiece.BLACK) {
+            if (movePiece.getColorOfPiece().getColor() == ColorOfPiece.BLACK) {
                 return true;
             }
             return false;
         } else
         // white player
         {
-            if (currentPiece.getColorOfPiece().getColor() == ColorOfPiece.WHITE) {
+            if (movePiece.getColorOfPiece().getColor() == ColorOfPiece.WHITE) {
                 return true;
             }
             return false;
@@ -247,16 +251,16 @@ public class ChessGameEngine {
      */
     public void determineActionFromSquareClick(MouseEvent e) {
         BoardSquare squareClicked = (BoardSquare) e.getSource();
-        ChessGamePiece pieceOnSquare = squareClicked.getPieceOnSquare();
+        MovePiece pieceOnSquare = squareClicked.getPieceOnSquare();
         board.clearColorsOnBoard();
         if (firstClick) {
-            currentPiece = squareClicked.getPieceOnSquare();
+        	movePiece = squareClicked.getPieceOnSquare();
             if (selectedPieceIsValid()) {
-                currentPiece.showLegalMoves(board);
+            	configurationPieceMove.showLegalMoves(board);
                 squareClicked.setBackground(Color.GREEN);
                 firstClick = false;
             } else {
-                if (currentPiece != null) {
+                if (movePiece != null) {
                     JOptionPane.showMessageDialog(
                             squareClicked,
                             "You tried to pick up the other player's piece! "
@@ -274,10 +278,10 @@ public class ChessGameEngine {
             }
         } else {
             if (pieceOnSquare == null ||
-                    !pieceOnSquare.equals(currentPiece)) // moving
+                    !pieceOnSquare.equals(movePiece)) // moving
             {
                 boolean moveSuccessful =
-                        currentPiece.move(
+                		movePiece.move(
                                 board,
                                 squareClicked.getRow(),
                                 squareClicked.getColumn());

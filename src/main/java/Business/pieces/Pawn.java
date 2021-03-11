@@ -5,6 +5,10 @@ import util.IsOnScreen;
 import GUI.board.ChessGameBoard;
 
 import javax.swing.*;
+
+import Business.Service.Moves.IConfigurationPieceMove;
+import Business.Service.Moves.Impl.MovePiece;
+
 import java.util.ArrayList;
 // -------------------------------------------------------------------------
 
@@ -18,9 +22,11 @@ import java.util.ArrayList;
  * @author Danielle Bushrow (dbushrow)
  * @version 2010.11.17
  */
-public class Pawn extends ChessGamePiece {
+public class Pawn extends MovePiece {
 
     private boolean notMoved;
+    private IConfigurationPieceMove configurationPieceMove;
+    private MovePiece movePiece;
 
     /**
      * Create a new Pawn object.
@@ -48,7 +54,7 @@ public class Pawn extends ChessGamePiece {
     public boolean move(ChessGameBoard board, int row, int col) {
         if (super.move(board, row, col)) {
             notMoved = false;
-            possibleMoves = calculatePossibleMoves(board);
+            possibleMoves = movePiece.calculatePossibleMoves(board);
             if ((getColorOfPiece().getColor() == ColorOfPiece.BLACK && row == 7)
                     || (getColorOfPiece().getColor() == ColorOfPiece.WHITE && row == 0)) { // pawn has reached the end of the board, promote it to queen
                 board.getCell(row, col).setPieceOnSquare(new Queen(
@@ -70,7 +76,7 @@ public class Pawn extends ChessGamePiece {
      * @return ArrayList<String> the moves
      */
     @Override
-    protected ArrayList<String> calculatePossibleMoves(ChessGameBoard board) {
+    public ArrayList<String> calculatePossibleMoves(ChessGameBoard board) {
         ArrayList<String> moves = new ArrayList<String>();
         if (IsOnScreen.invoke(pieceRow, pieceColumn)) {
             int currRow =
@@ -123,6 +129,6 @@ public class Pawn extends ChessGamePiece {
     @Override
     public ImageIcon createImageByPieceType(){
         String nameClass = this.getClass().getName();
-        return ChessGamePiece.getImageIcon(nameClass,getColorOfPiece().getColor());
+        return MovePiece.getImageIcon(nameClass,getColorOfPiece().getColor());
     }
 }

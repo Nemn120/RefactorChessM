@@ -19,7 +19,7 @@ import java.util.ArrayList;
  * @author Danielle Bushrow (dbushrow)
  * @version 2010.11.17
  */
-public class Rook extends ChessGamePiece {
+public class Rook extends MovePiece {
 
     // private ArrayList<String> possibleMoves;
 
@@ -47,7 +47,7 @@ public class Rook extends ChessGamePiece {
      * @return ArrayList<String> the list of moves
      */
     @Override
-    protected ArrayList<String> calculatePossibleMoves(ChessGameBoard board) {
+    public ArrayList<String> calculatePossibleMoves(ChessGameBoard board) {
 
         this.calculateSouthMoves = new CalculateSouthMoves(pieceRow, pieceColumn);
         this.calculateNorthMoves = new CalculateNorthMoves(pieceRow, pieceColumn);

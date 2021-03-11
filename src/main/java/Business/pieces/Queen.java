@@ -16,7 +16,7 @@ import java.util.ArrayList;
  * @author Danielle Bushrow (dbushrow)
  * @version 2010.11.17
  */
-public class Queen extends ChessGamePiece {
+public class Queen extends MovePiece {
 
     private ICalculateNorthWestMoves calculateNorthWestMoves;
     private ICalculateNorthEastMoves calculateNorthEastMoves;
@@ -46,7 +46,7 @@ public class Queen extends ChessGamePiece {
      * @return ArrayList<String> the list of moves
      */
     @Override
-    protected ArrayList<String> calculatePossibleMoves(ChessGameBoard board) {
+    public ArrayList<String> calculatePossibleMoves(ChessGameBoard board) {
 
         this.calculateNorthEastMoves = new CalculateNorthEastMoves(pieceRow,pieceColumn);
         ArrayList<String> northEastMoves = this.calculateNorthEastMoves.invoke(board,8,isEnemy);
