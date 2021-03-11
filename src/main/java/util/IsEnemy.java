@@ -1,7 +1,6 @@
 package util;
 
 import Business.Service.Moves.Impl.MovePiece;
-import Business.pieces.ChessGamePiece;
 import GUI.board.ChessGameBoard;
 
 public class IsEnemy {

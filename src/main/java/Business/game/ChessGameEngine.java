@@ -3,7 +3,6 @@ package Business.game;
 import util.ColorOfPiece;
 import Business.Service.Moves.IConfigurationPieceMove;
 import Business.Service.Moves.Impl.MovePiece;
-import Business.pieces.ChessGamePiece;
 import Business.pieces.King;
 import GUI.ChessPanel;
 import GUI.board.BoardSquare;

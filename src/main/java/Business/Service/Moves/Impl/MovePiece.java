@@ -7,7 +7,6 @@ import javax.swing.ImageIcon;
 import Business.Service.Moves.IConfigurationPieceMove;
 import Business.Service.Moves.IMovePiece;
 import Business.game.ChessGameEngine;
-import Business.pieces.ChessGamePiece;
 import GUI.ChessGraveyard;
 import GUI.ChessPanel;
 import GUI.board.ChessGameBoard;

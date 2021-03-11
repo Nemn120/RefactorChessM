@@ -1,7 +1,6 @@
 package GUI;
 
 import Business.Service.Moves.Impl.MovePiece;
-import Business.pieces.ChessGamePiece;
 
 import javax.swing.*;
 import java.awt.*;

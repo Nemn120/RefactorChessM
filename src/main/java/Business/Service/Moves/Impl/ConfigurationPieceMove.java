@@ -5,7 +5,6 @@ import java.util.ArrayList;
 
 import Business.Service.Moves.IConfigurationPieceMove;
 import Business.game.ChessGameEngine;
-import Business.pieces.ChessGamePiece;
 import GUI.ChessPanel;
 import GUI.board.ChessGameBoard;
 import util.ColorOfPiece;
