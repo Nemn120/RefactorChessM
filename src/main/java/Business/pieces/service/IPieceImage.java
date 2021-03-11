@@ -4,7 +4,7 @@ import javax.swing.*;
 
 public interface IPieceImage {
 
-    public ImageIcon createImageByPieceType();
+    ImageIcon createImageByPieceType();
 
 
 }
