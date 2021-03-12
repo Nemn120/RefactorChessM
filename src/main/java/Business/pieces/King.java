@@ -105,21 +105,7 @@ public class King extends ChessGamePiece{
      */
     @Override
     public ImageIcon createImageByPieceType(){
-        if ( getColorOfPiece().getColor() == ColorOfPiece.WHITE ){
-            return new ImageIcon(
-                getClass().getResource("/ChessImages/WhiteKing.gif")
-            );
-        }
-        else if ( getColorOfPiece().getColor() == ColorOfPiece.BLACK ){
-            return new ImageIcon(
-                getClass().getResource("/ChessImages/BlackKing.gif" )
-            );            
-        }
-        else
-        {
-            return new ImageIcon(
-                getClass().getResource("/ChessImages/default-Unassigned.gif" )
-            );            
-        }
+        String nameClass = this.getClass().getName();
+        return ChessGamePiece.getImageIcon(nameClass,getColorOfPiece().getColor());
     }
 }
