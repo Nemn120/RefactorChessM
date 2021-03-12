@@ -1,10 +1,11 @@
 package Business.pieces;
 
+import Business.Service.Moves.*;
+import Business.Service.Moves.Impl.*;
 import GUI.board.ChessGameBoard;
 
 import javax.swing.*;
 import java.util.ArrayList;
-// -------------------------------------------------------------------------
 
 /**
  * Represents a King game piece.
@@ -14,9 +15,16 @@ import java.util.ArrayList;
  * @author Danielle Bushrow (dbushrow)
  * @version 2010.11.17
  */
-public class King
-    extends ChessGamePiece{
-    // ----------------------------------------------------------
+public class King extends ChessGamePiece{
+
+    private ICalculateNorthWestMoves calculateNorthWestMoves;
+    private ICalculateNorthEastMoves calculateNorthEastMoves;
+    private ICalculateSouthWestMoves calculateSouthWestMoves;
+    private ICalculateSouthEastMoves calculateSouthEastMoves;
+    private ICalculateSouthMoves calculateSouthMoves;
+    private ICalculateNorthMoves calculateNorthMoves;
+    private ICalculateEastMoves calculateEastMoves;
+    private ICalculateWestMoves calculateWestMoves;
     /**
      * Create a new King object.
      *
@@ -42,14 +50,32 @@ public class King
      */
     @Override
     protected ArrayList<String> calculatePossibleMoves( ChessGameBoard board ){
-        ArrayList<String> northEastMoves = calculateNorthEastMoves( board, 1 );
-        ArrayList<String> northWestMoves = calculateNorthWestMoves( board, 1 );
-        ArrayList<String> southEastMoves = calculateSouthEastMoves( board, 1 );
-        ArrayList<String> southWestMoves = calculateSouthWestMoves( board, 1 );
-        ArrayList<String> northMoves = calculateNorthMoves( board, 1 );
-        ArrayList<String> southMoves = calculateSouthMoves( board, 1 );
-        ArrayList<String> eastMoves = calculateEastMoves( board, 1 );
-        ArrayList<String> westMoves = calculateWestMoves( board, 1 );
+
+        this.calculateNorthEastMoves = new CalculateNorthEastMoves(pieceRow,pieceColumn);
+        ArrayList<String> northEastMoves = this.calculateNorthEastMoves.invoke(board,1,isEnemy);
+
+        this.calculateNorthWestMoves = new CalculateNorthWestMoves(pieceRow,pieceColumn);
+        ArrayList<String> northWestMoves = calculateNorthWestMoves.invoke(board,1,isEnemy);
+
+        this.calculateSouthEastMoves = new CalculateSouthEastMoves(pieceRow,pieceColumn);
+        ArrayList<String> southEastMoves = calculateSouthEastMoves.invoke(board, 1,isEnemy);
+
+        this.calculateSouthWestMoves = new CalculateSouthWestMoves(pieceRow,pieceColumn);
+        ArrayList<String> southWestMoves = calculateSouthWestMoves.invoke(board, 1,isEnemy);
+
+        this.calculateSouthMoves = new CalculateSouthMoves(pieceRow,pieceColumn);
+        ArrayList<String> southMoves = calculateSouthMoves.invoke( board, 1, isEnemy );
+
+        this.calculateNorthMoves = new CalculateNorthMoves(pieceRow,pieceColumn);
+        ArrayList<String> northMoves = calculateNorthMoves.invoke(board,1,isEnemy);
+
+        this.calculateEastMoves = new CalculateEastMoves(pieceRow,pieceColumn);
+        ArrayList<String> eastMoves = calculateEastMoves.invoke(board,1,isEnemy);
+
+        this.calculateWestMoves = new CalculateWestMoves(pieceRow,pieceColumn);
+        ArrayList<String> westMoves = calculateWestMoves.invoke(board,1,isEnemy);
+
+
         ArrayList<String> allMoves = new ArrayList<String>();
         allMoves.addAll( northEastMoves );
         allMoves.addAll( northWestMoves );
@@ -79,6 +105,7 @@ public class King
     @Override
     public ImageIcon createImageByPieceType(){
         return new ImageIcon(
-            getClass().getResource(ChessGamePiece.getUrlResourceByPiece(this.getClass().getName(),getColorOfPiece())));
+                getClass().getResource(resourceOfPiece.resourceByType("King"))
+        );
     }
 }

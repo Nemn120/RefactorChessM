@@ -1,5 +1,10 @@
 package Business.pieces;
 
+import util.ColorOfPiece;
+import util.IResourceOfPiece;
+import util.IsEnemy;
+import util.IsOnScreen;
+import util.ResourceOfPiece;
 import Business.game.ChessGameEngine;
 import GUI.ChessGraveyard;
 import GUI.ChessPanel;
@@ -8,7 +13,6 @@ import GUI.board.ChessGameBoard;
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
-// -------------------------------------------------------------------------
 
 /**
  * Abstract class that is used to represent a game piece on the chess board.
@@ -23,8 +27,10 @@ import java.util.ArrayList;
  */
 public abstract class ChessGamePiece {
     private boolean skipMoveGeneration;
-    private int pieceColor;
+    private ColorOfPiece colorOfPiece;
+    protected IsEnemy isEnemy;
     private ImageIcon pieceImage;
+    protected IResourceOfPiece resourceOfPiece;
     /**
      * The list of possible moves for this piece. Updated when actions involving
      * this piece occur. (created, moved, selected, etc)
@@ -38,19 +44,6 @@ public abstract class ChessGamePiece {
      * The game piece's column.
      */
     protected int pieceColumn;
-    /**
-     * Represents a black piece as an int
-     */
-    public static final int BLACK = 0;
-    /**
-     * Represents a white piece as an int
-     */
-    public static final int WHITE = 1;
-    /**
-     * Represents a piece that has not been assigned a color
-     */
-    public static final int UNASSIGNED = -1;
-    // ----------------------------------------------------------
 
     /**
      * Create a new GamePiece object.
@@ -60,13 +53,11 @@ public abstract class ChessGamePiece {
      * @param col        column of the GamePiece
      * @param pieceColor either GamePiece.WHITE, BLACK, or UNASSIGNED
      */
-    public ChessGamePiece(
-            ChessGameBoard board,
-            int row,
-            int col,
-            int pieceColor) {
+    public ChessGamePiece(ChessGameBoard board, int row, int col, int pieceColor) {
         skipMoveGeneration = false;
-        this.pieceColor = pieceColor;
+        this.colorOfPiece = new ColorOfPiece(pieceColor);
+        this.isEnemy=new IsEnemy(pieceColor);
+        this.resourceOfPiece = new ResourceOfPiece(pieceColor);
         pieceImage = createImageByPieceType();
         pieceRow = row;
         pieceColumn = col;
@@ -75,7 +66,6 @@ public abstract class ChessGamePiece {
         }
         possibleMoves = calculatePossibleMoves(board);
     }
-    // ----------------------------------------------------------
 
     /**
      * Create a new GamePiece object. This constructor is used for special
@@ -88,14 +78,11 @@ public abstract class ChessGamePiece {
      * @param skipMoveGeneration if true, moves will not be generated in the constructor
      * @param pieceColor         either GamePiece.BLACK, WHITE, or UNASSIGNED
      */
-    public ChessGamePiece(
-            ChessGameBoard board,
-            int row,
-            int col,
-            int pieceColor,
-            boolean skipMoveGeneration) {
+    public ChessGamePiece(ChessGameBoard board, int row, int col, int pieceColor, boolean skipMoveGeneration) {
         this.skipMoveGeneration = skipMoveGeneration;
-        this.pieceColor = pieceColor;
+        this.colorOfPiece = new ColorOfPiece(pieceColor);
+        this.isEnemy = new IsEnemy(pieceColor);
+        this.resourceOfPiece = new ResourceOfPiece(pieceColor);
         pieceImage = this.createImageByPieceType();
         pieceRow = row;
         pieceColumn = col;
@@ -106,20 +93,6 @@ public abstract class ChessGamePiece {
             possibleMoves = calculatePossibleMoves(board);
         }
     }
-    public static String getUrlResourceByPiece(String namePiece,int colorOfPiece){
-        namePiece = namePiece.substring(16);//Remove "Business.pieces." of namePiece
-        if ( colorOfPiece == ChessGamePiece.WHITE ){
-            return "/ChessImages/White"+namePiece+".gif";           
-        }
-        else if ( colorOfPiece == ChessGamePiece.BLACK ){
-            return "/ChessImages/Black"+namePiece+".gif";           
-        }
-        else
-        {
-            return "/ChessImages/default-Unassigned.gif";         
-        }
-    }
-    // ----------------------------------------------------------
 
     /**
      * Generates and returns a list of Strings that represent possible move
@@ -130,263 +103,7 @@ public abstract class ChessGamePiece {
      * @param board the board to check moves on
      * @return ArrayList<String> the list of moves
      */
-    protected abstract ArrayList<String> calculatePossibleMoves(
-            ChessGameBoard board);
-
-    /**
-     * Calculates and returns moves in the south direction relative to this
-     * piece.
-     *
-     * @param board    the board to calculate the moves on
-     * @param numMoves the number of moves to calculate
-     * @return ArrayList<String> the calculated moves.
-     */
-    protected ArrayList<String> calculateSouthMoves(
-            ChessGameBoard board,
-            int numMoves) {
-        ArrayList<String> moves = new ArrayList<String>();
-        int count = 0;
-        if (isPieceOnScreen()) {
-            for (int i = pieceRow + 1; i < 8 && count < numMoves; i++) {
-                if ((board.getCell(i, pieceColumn).getPieceOnSquare()
-                        == null || isEnemy(board, i, pieceColumn))) {
-                    moves.add(i + "," + pieceColumn);
-                    count++;
-                    if (isEnemy(board, i, pieceColumn)) {
-                        break;
-                    }
-                } else {
-                    break;
-                }
-            }
-        }
-        return moves;
-    }
-    // ----------------------------------------------------------
-
-    /**
-     * Calculates and returns moves in the north direction relative to this
-     * piece.
-     *
-     * @param board    the board to calculate the moves on
-     * @param numMoves the number of moves to calculate
-     * @return ArrayList<String> the moves in this direction
-     */
-    protected ArrayList<String> calculateNorthMoves(
-            ChessGameBoard board,
-            int numMoves) {
-        ArrayList<String> moves = new ArrayList<String>();
-        int count = 0;
-        if (isPieceOnScreen()) {
-            for (int i = pieceRow - 1; i >= 0 && count < numMoves; i--) {
-                if ((board.getCell(i, pieceColumn).getPieceOnSquare()
-                        == null || isEnemy(board, i, pieceColumn))) {
-                    moves.add(i + "," + pieceColumn);
-                    count++;
-                    if (isEnemy(board, i, pieceColumn)) {
-                        break;
-                    }
-                } else {
-                    break;
-                }
-            }
-        }
-        return moves;
-    }
-    // ----------------------------------------------------------
-
-    /**
-     * Calculates and returns moves in the east direction relative to this
-     * piece.
-     *
-     * @param board    the board to calculate the moves on
-     * @param numMoves the number of moves to calculate
-     * @return ArrayList<String> the moves in this direction
-     */
-    protected ArrayList<String> calculateEastMoves(
-            ChessGameBoard board,
-            int numMoves) {
-        ArrayList<String> moves = new ArrayList<String>();
-        int count = 0;
-        if (isPieceOnScreen()) {
-            for (int i = pieceColumn + 1; i < 8 && count < numMoves; i++) {
-                if ((board.getCell(pieceRow, i).getPieceOnSquare()
-                        == null || isEnemy(board, pieceRow, i))) {
-                    moves.add(pieceRow + "," + i);
-                    count++;
-                    if (isEnemy(board, pieceRow, i)) {
-                        break;
-                    }
-                } else {
-                    break;
-                }
-            }
-        }
-        return moves;
-    }
-    // ----------------------------------------------------------
-
-    /**
-     * Calculates and returns moves in the west direction relative to this
-     * piece.
-     *
-     * @param board    the board to calculate the moves on
-     * @param numMoves the number of moves to calculate
-     * @return ArrayList<String> the moves in this direction
-     */
-    protected ArrayList<String> calculateWestMoves(
-            ChessGameBoard board,
-            int numMoves) {
-        ArrayList<String> moves = new ArrayList<String>();
-        int count = 0;
-        if (isPieceOnScreen()) {
-            for (int i = pieceColumn - 1; i >= 0 && count < numMoves; i--) {
-                if ((board.getCell(pieceRow, i).getPieceOnSquare()
-                        == null || isEnemy(board, pieceRow, i))) {
-                    moves.add(pieceRow + "," + i);
-                    count++;
-                    if (isEnemy(board, pieceRow, i)) {
-                        break;
-                    }
-                } else {
-                    break;
-                }
-            }
-        }
-        return moves;
-    }
-    // ----------------------------------------------------------
-
-    /**
-     * Calculates and returns moves in the north-west direction relative to this
-     * piece.
-     *
-     * @param board    the board to calculate the moves on
-     * @param numMoves the number of moves to calculate
-     * @return ArrayList<String> the moves in this direction
-     */
-    protected ArrayList<String> calculateNorthWestMoves(
-            ChessGameBoard board,
-            int numMoves) {
-        ArrayList<String> moves = new ArrayList<String>();
-        int count = 0;
-        if (isPieceOnScreen()) {
-            for (int i = 1; i < 8 && count < numMoves; i++) {
-                if (isOnScreen(pieceRow - i, pieceColumn - i)
-                        && (board.getCell(pieceRow - i,
-                        pieceColumn - i).getPieceOnSquare() == null)) {
-                    moves.add((pieceRow - i) + "," + (pieceColumn - i));
-                    count++;
-                } else if (isEnemy(board, pieceRow - i, pieceColumn - i)) {
-                    moves.add((pieceRow - i) + "," + (pieceColumn - i));
-                    count++;
-                    break;
-                } else {
-                    break;
-                }
-            }
-        }
-        return moves;
-    }
-    // ----------------------------------------------------------
-
-    /**
-     * Calculates and returns moves in the north-east direction relative to this
-     * piece.
-     *
-     * @param board    the board to calculate the moves on
-     * @param numMoves the number of moves to calculate
-     * @return ArrayList<String> the moves in this direction
-     */
-    protected ArrayList<String> calculateNorthEastMoves(
-            ChessGameBoard board,
-            int numMoves) {
-        ArrayList<String> moves = new ArrayList<String>();
-        int count = 0;
-        if (isPieceOnScreen()) {
-            for (int i = 1; i < 8 && count < numMoves; i++) {
-                if (isOnScreen(pieceRow - i, pieceColumn + i)
-                        && (board.getCell(pieceRow - i,
-                        pieceColumn + i).getPieceOnSquare() == null)) {
-                    moves.add((pieceRow - i) + "," + (pieceColumn + i));
-                    count++;
-                } else if (isEnemy(board, pieceRow - i, pieceColumn + i)) {
-                    moves.add((pieceRow - i) + "," + (pieceColumn + i));
-                    count++;
-                    break;
-                } else {
-                    break;
-                }
-            }
-        }
-        return moves;
-    }
-    // ----------------------------------------------------------
-
-    /**
-     * Calculates and returns moves in the south-west direction relative to this
-     * piece.
-     *
-     * @param board    the board to calculate the moves on
-     * @param numMoves the number of moves to calculate
-     * @return ArrayList<String> the moves in this direction
-     */
-    protected ArrayList<String> calculateSouthWestMoves(
-            ChessGameBoard board,
-            int numMoves) {
-        ArrayList<String> moves = new ArrayList<String>();
-        int count = 0;
-        if (isPieceOnScreen()) {
-            for (int i = 1; i < 8 && count < numMoves; i++) {
-                if (isOnScreen(pieceRow + i, pieceColumn - i)
-                        && (board.getCell(pieceRow + i,
-                        pieceColumn - i).getPieceOnSquare() == null)) {
-                    moves.add((pieceRow + i) + "," + (pieceColumn - i));
-                    count++;
-                } else if (isEnemy(board, pieceRow + i, pieceColumn - i)) {
-                    moves.add((pieceRow + i) + "," + (pieceColumn - i));
-                    count++;
-                    break;
-                } else {
-                    break;
-                }
-            }
-        }
-        return moves;
-    }
-    // ----------------------------------------------------------
-
-    /**
-     * Calculates and returns moves in the south-east direction relative to this
-     * piece.
-     *
-     * @param board    the board to calculate the moves on
-     * @param numMoves the number of moves to calculate
-     * @return ArrayList<String> the moves in this direction
-     */
-    protected ArrayList<String> calculateSouthEastMoves(
-            ChessGameBoard board,
-            int numMoves) {
-        ArrayList<String> moves = new ArrayList<String>();
-        int count = 0;
-        if (isPieceOnScreen()) {
-            for (int i = 1; i < 8 && count < numMoves; i++) {
-                if (isOnScreen(pieceRow + i, pieceColumn + i)
-                        && (board.getCell(pieceRow + i,
-                        pieceColumn + i).getPieceOnSquare() == null)) {
-                    moves.add((pieceRow + i) + "," + (pieceColumn + i));
-                    count++;
-                } else if (isEnemy(board, pieceRow + i, pieceColumn + i)) {
-                    moves.add((pieceRow + i) + "," + (pieceColumn + i));
-                    count++;
-                    break;
-                } else {
-                    break;
-                }
-            }
-        }
-        return moves;
-    }
+    protected abstract ArrayList<String> calculatePossibleMoves(ChessGameBoard board);
 
     /**
      * Creates the ImageIcon by the color of the piece.
@@ -404,43 +121,9 @@ public abstract class ChessGamePiece {
     public ImageIcon getImage() {
         return pieceImage;
     }
-    // ----------------------------------------------------------
 
-    /**
-     * Gets the color of this piece.
-     *
-     * @return int 0 for a black piece, 1 for a white piece, -1 for an
-     * unassigned piece.
-     */
-    public int getColorOfPiece() {
-        return pieceColor;
-    }
-    // ----------------------------------------------------------
-
-    /**
-     * Checks if the requested location is in bounds.
-     *
-     * @param row the row to check
-     * @param col the column to check
-     * @return boolean true if the location is valid, false if not
-     */
-    public boolean isOnScreen(int row, int col) {
-        if (row >= 0 && row <= 7 && col >= 0 && col <= 7) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-    // ----------------------------------------------------------
-
-    /**
-     * Checks if this piece's current location is in bounds. This prevents users
-     * from trying to move pieces out of the graveyard.
-     *
-     * @return true if in bounds, false otherwise
-     */
-    public boolean isPieceOnScreen() {
-        return isOnScreen(pieceRow, pieceColumn);
+    public ColorOfPiece getColorOfPiece(){
+        return colorOfPiece;
     }
 
     /**
@@ -455,7 +138,7 @@ public abstract class ChessGamePiece {
         if (canMove(board, row, col)) {
             String moveLog = this.toString() + " -> ";
             board.clearCell(pieceRow, pieceColumn);
-            if (isEnemy(board, row, col)) {
+            if (isEnemy.invoke(board, row, col)) {
                 ChessGraveyard graveyard;
                 ChessGameEngine gameEngine =
                         ((ChessPanel) board.getParent()).getGameEngine();
@@ -508,10 +191,7 @@ public abstract class ChessGamePiece {
      * @param col   the column to move to
      * @return boolean true if the move is safe, false if it is not
      */
-    private boolean testMoveForKingSafety(
-            ChessGameBoard board,
-            int row,
-            int col) {
+    private boolean testMoveForKingSafety(ChessGameBoard board, int row, int col) {
         updatePossibleMoves(board);
         ChessGamePiece oldPieceOnOtherSquare =
                 board.getCell(row, col).getPieceOnSquare();
@@ -531,7 +211,6 @@ public abstract class ChessGamePiece {
         board.getCell(row, col).setPieceOnSquare(oldPieceOnOtherSquare);
         return retVal;
     }
-    // ----------------------------------------------------------
 
     /**
      * Re-calculates the possible moves for this piece. This is called whenever
@@ -542,7 +221,6 @@ public abstract class ChessGamePiece {
     protected void updatePossibleMoves(ChessGameBoard board) {
         possibleMoves = calculatePossibleMoves(board);
     }
-    // ----------------------------------------------------------
 
     /**
      * Sets the internal piece location.
@@ -554,7 +232,6 @@ public abstract class ChessGamePiece {
         pieceRow = row;
         pieceColumn = col;
     }
-    // ----------------------------------------------------------
 
     /**
      * Returns this piece's row location.
@@ -564,7 +241,6 @@ public abstract class ChessGamePiece {
     public int getRow() {
         return pieceRow;
     }
-    // ----------------------------------------------------------
 
     /**
      * Returns this piece's column.
@@ -574,7 +250,6 @@ public abstract class ChessGamePiece {
     public int getColumn() {
         return pieceColumn;
     }
-    // ----------------------------------------------------------
 
     /**
      * Shows the legal move locations for this GamePiece.
@@ -583,14 +258,14 @@ public abstract class ChessGamePiece {
      */
     public void showLegalMoves(ChessGameBoard board) {
         updatePossibleMoves(board);
-        if (isPieceOnScreen()) {
+        if (IsOnScreen.invoke(pieceRow, pieceColumn)) {
             for (String locStr : possibleMoves) {
                 String[] currCoords = locStr.split(",");
                 int row = Integer.parseInt(currCoords[0]);
                 int col = Integer.parseInt(currCoords[1]);
                 if (canMove(board, row, col)) // only show legal moves
                 {
-                    if (isEnemy(board, row, col)) {
+                    if (isEnemy.invoke(board, row, col)) {
                         board.getCell(row, col).setBackground(
                                 Color.YELLOW);
                     } else {
@@ -600,7 +275,6 @@ public abstract class ChessGamePiece {
             }
         }
     }
-    // ----------------------------------------------------------
 
     /**
      * Determines if this piece has legal moves to make.
@@ -610,7 +284,7 @@ public abstract class ChessGamePiece {
      */
     public boolean hasLegalMoves(ChessGameBoard board) {
         updatePossibleMoves(board);
-        if (isPieceOnScreen()) {
+        if (IsOnScreen.invoke(pieceRow, pieceColumn)) {
             for (String locStr : possibleMoves) {
                 String[] currCoords = locStr.split(",");
                 int row = Integer.parseInt(currCoords[0]);
@@ -624,46 +298,6 @@ public abstract class ChessGamePiece {
         }
         return false;
     }
-    // ----------------------------------------------------------
-
-    /**
-     * Determines if the row and column contains an enemy piece. This is defined
-     * in GamePiece and not ChessGameBoard because different pieces have
-     * different enemies depending on their colors.
-     *
-     * @param row   row of the GamePiece
-     * @param col   column of the GamePiece
-     * @param board the board to check
-     * @return true if it is an enemy piece, false if not
-     */
-    public boolean isEnemy(ChessGameBoard board, int row, int col) {
-        if (row > 7 || col > 7 || row < 0 || col < 0) {
-            return false;
-        }
-        ChessGamePiece enemyPiece =
-                board.getCell(row, col).getPieceOnSquare() == null
-                        ? null
-                        : board.getCell(row, col).getPieceOnSquare();
-        if (enemyPiece == null
-                || this.getColorOfPiece() == ChessGamePiece.UNASSIGNED
-                || enemyPiece.getColorOfPiece() == ChessGamePiece.UNASSIGNED) {
-            return false;
-        }
-        if (this.getColorOfPiece() == ChessGamePiece.WHITE) {
-            if (enemyPiece.getColorOfPiece() == ChessGamePiece.BLACK) {
-                return true;
-            } else {
-                return false;
-            }
-        } else {
-            if (enemyPiece.getColorOfPiece() == ChessGamePiece.WHITE) {
-                return true;
-            } else {
-                return false;
-            }
-        }
-    }
-    // ----------------------------------------------------------
 
     /**
      * Gets a list of GamePieces that can currently attack this game piece.
@@ -674,16 +308,16 @@ public abstract class ChessGamePiece {
     public ArrayList<ChessGamePiece> getCurrentAttackers(ChessGameBoard board) {
         ArrayList<ChessGamePiece> attackers = new ArrayList<ChessGamePiece>();
         int enemyColor =
-                (this.getColorOfPiece() == ChessGamePiece.BLACK)
-                        ? ChessGamePiece.WHITE
-                        : ChessGamePiece.BLACK;
+                (this.getColorOfPiece().getColor() == ColorOfPiece.BLACK)
+                        ? ColorOfPiece.WHITE
+                        : ColorOfPiece.BLACK;
         this.updatePossibleMoves(board);
         for (int i = 0; i < board.getCells().length; i++) {
             for (int j = 0; j < board.getCells()[0].length; j++) {
                 ChessGamePiece currPiece =
                         board.getCell(i, j).getPieceOnSquare();
                 if (currPiece != null
-                        && currPiece.getColorOfPiece() == enemyColor) {
+                        && currPiece.getColorOfPiece().getColor() == enemyColor) {
                     currPiece.updatePossibleMoves(board);
                     if (currPiece.canMove(board, pieceRow, pieceColumn)) {
                         attackers.add(currPiece);
