@@ -76,30 +76,5 @@ public class King
     public boolean isChecked( ChessGameBoard board ){
         return getCurrentAttackers( board ).size() > 0;
     }
-    /**
-     * Creates an icon for this piece depending on the piece's color.
-     *
-     * @return ImageIcon the ImageIcon representation of this piece.
-     */
 
-    /*
-    @Override
-    public ImageIcon createImageByPieceType(){
-        if ( getColorOfPiece() == ChessGamePiece.WHITE ){
-            return new ImageIcon(
-                getClass().getResource("/ChessImages/WhiteKing.gif")
-            );            
-        }
-        else if ( getColorOfPiece() == ChessGamePiece.BLACK ){
-            return new ImageIcon(
-                getClass().getResource("/ChessImages/BlackKing.gif" )
-            );            
-        }
-        else
-        {
-            return new ImageIcon(
-                getClass().getResource("/ChessImages/default-Unassigned.gif" )
-            );            
-        }
-    }*/
 }

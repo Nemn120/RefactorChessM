@@ -54,31 +54,5 @@ public class Rook
         allMoves.addAll( eastMoves );
         return allMoves;
     }
-    /**
-     * Creates an icon for this piece depending on the piece's color.
-     *
-     * @return ImageIcon the ImageIcon representation of this piece.
-     */
-    /*
-    @Override
-    public ImageIcon createImageByPieceType(){
-        if ( getColorOfPiece() == ChessGamePiece.WHITE ){
-            return new ImageIcon(
-                getClass().getResource("/ChessImages/WhiteRook.gif")
-            );            
-        }
-        else if ( getColorOfPiece() == ChessGamePiece.BLACK ){
-            return new ImageIcon(
-                getClass().getResource("/ChessImages/BlackRook.gif")
-            );            
-        }
-        else
-        {
-            return new ImageIcon(
-                getClass().getResource("/ChessImages/default-Unassigned.gif")
-            );        
-        }
-    }
 
-     */
 }
