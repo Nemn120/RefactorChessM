@@ -26,7 +26,9 @@ public class KnightTest {
         ArrayList<String> esperado=new ArrayList<>();
         esperado.add("2,2");
         esperado.add("2,0");
+
         ArrayList<String> actual=caballoBlack.calculatePossibleMoves(chessGameBoard);
+
         System.out.println("esperadoCaballoBlack: "+esperado);
         System.out.println("actualCaballoBlack: "+actual);
 

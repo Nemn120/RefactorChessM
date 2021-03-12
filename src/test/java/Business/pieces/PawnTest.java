@@ -30,22 +30,21 @@ public class PawnTest {
 */
 
     @Test
-    public void TestMovePawnBlack2(){
-
-        ChessPanel.getGameBoard().clearCell(6,1);
-        ChessPanel.getGameBoard().clearCell(7,1);
+    public void TestMovePawnBlack1(){
 
         pawnBlack.move(ChessPanel.getGameBoard(),3,1);
         pawnBlack.move(ChessPanel.getGameBoard(),4,1);
         pawnBlack.move(ChessPanel.getGameBoard(),5,1);
+        ChessPanel.getGameBoard().clearCell(6,1);
         pawnBlack.move(ChessPanel.getGameBoard(),6,1);
+        ChessPanel.getGameBoard().clearCell(7,1);
 
         Assert.assertTrue(pawnBlack.move(ChessPanel.getGameBoard(),7,1));
 
     }
 
     @Test
-    public void TestMovePawnBlack3(){
+    public void TestMovePawnBlack2(){
         Assert.assertFalse(pawnBlack.move(ChessPanel.getGameBoard(),0,1));
     }
 
@@ -55,7 +54,8 @@ public class PawnTest {
         pawnWhite.move(ChessPanel.getGameBoard(),5,1);
         pawnWhite.move(ChessPanel.getGameBoard(),4,1);
         pawnWhite.move(ChessPanel.getGameBoard(),3,1);
-        Assert.assertTrue(pawnWhite.move(ChessPanel.getGameBoard(),2,1));
+
+        Assert.assertTrue(pawnWhite.move(ChessPanel.getGameBoard(),2,1));//enemigo black
 
     }
 
