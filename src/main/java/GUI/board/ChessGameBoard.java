@@ -1,5 +1,7 @@
 package GUI.board;
 
+import Business.service.moves.IPieceMoveService;
+import Business.service.moves.impl.PieceMoveServiceImpl;
 import util.ColorOfPiece;
 import Business.pieces.*;
 import GUI.ChessPanel;
@@ -23,6 +25,9 @@ import java.util.ArrayList;
 public class ChessGameBoard extends JPanel {
     private BoardSquare[][] chessCells;
     private BoardListener listener;
+    private IPieceMoveService pieceMoveService;
+
+
 
     /**
      * Returns the entire board.
@@ -122,6 +127,7 @@ public class ChessGameBoard extends JPanel {
         listener = new BoardListener();
         chessCells = new BoardSquare[8][8];
         initializeBoard();
+        pieceMoveService = new PieceMoveServiceImpl();
     }
 
     /**
@@ -183,7 +189,9 @@ public class ChessGameBoard extends JPanel {
                     } else if (j == 1 || j == 6) {
                         pieceToAdd = new Knight(this, i, j, colNum);
                     } else if (j == 2 || j == 5) {
+
                         pieceToAdd = new Bishop(this, i, j, colNum);
+
                     } else if (j == 3) {
                         pieceToAdd = new King(this, i, j, colNum);
                     } else {

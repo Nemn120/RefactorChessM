@@ -1,10 +1,8 @@
 package Business.pieces;
 
-import Business.Service.Moves.ICalculateEastMoves;
-import Business.Service.Moves.ICalculateNorthMoves;
-import Business.Service.Moves.ICalculateSouthMoves;
-import Business.Service.Moves.ICalculateWestMoves;
-import Business.Service.Moves.Impl.*;
+import Business.service.moves.cardinal.Impl.*;
+import Business.service.moves.pieces.CreateMoveService;
+import Business.service.moves.pieces.PieceMove;
 import GUI.board.ChessGameBoard;
 import util.ColorOfPiece;
 
@@ -21,13 +19,6 @@ import java.util.ArrayList;
  */
 public class Rook extends ChessGamePiece {
 
-    // private ArrayList<String> possibleMoves;
-
-    private ICalculateSouthMoves calculateSouthMoves;
-    private ICalculateNorthMoves calculateNorthMoves;
-    private ICalculateWestMoves calculateWestMoves;
-    private ICalculateEastMoves calculateEastMoves;
-
     /**
      * Create a new Rook object.
      *
@@ -38,31 +29,14 @@ public class Rook extends ChessGamePiece {
      */
     public Rook(ChessGameBoard board, int row, int col, int color) {
         super(board, row, col, color);
+        pieceMove = new PieceMove(CreateMoveService.rookMove(row,col,new ColorOfPiece(color)));
+        possibleMoves = pieceMove.calculateCardinalMoves(board,8);
     }
 
-    /**
-     * Calculates the possible moves for this Rook.
-     *
-     * @param board the board to check on
-     * @return ArrayList<String> the list of moves
-     */
     @Override
-    protected ArrayList<String> calculatePossibleMoves(ChessGameBoard board) {
-
-        this.calculateSouthMoves = new CalculateSouthMoves(pieceRow, pieceColumn);
-        this.calculateNorthMoves = new CalculateNorthMoves(pieceRow, pieceColumn);
-        this.calculateEastMoves = new CalculateEastMoves(pieceRow, pieceColumn);
-        this.calculateWestMoves = new CalculateWestMoves(pieceRow, pieceColumn);
-        ArrayList<String> northMoves = calculateNorthMoves.invoke(board, 8, isEnemy);
-        ArrayList<String> southMoves = calculateSouthMoves.invoke(board, 8, isEnemy);
-        ArrayList<String> westMoves = calculateWestMoves.invoke(board, 8, isEnemy);
-        ArrayList<String> eastMoves = calculateEastMoves.invoke(board, 8, isEnemy);
-        ArrayList<String> allMoves = new ArrayList<String>();
-        allMoves.addAll(northMoves);
-        allMoves.addAll(southMoves);
-        allMoves.addAll(westMoves);
-        allMoves.addAll(eastMoves);
-        return allMoves;
+    public void calculatePossibleMoves(ChessGameBoard board) {
+        pieceMove = new PieceMove(CreateMoveService.rookMove(pieceRow,pieceColumn,colorOfPiece));
+        possibleMoves = pieceMove.calculateCardinalMoves(board,8);
     }
 
     /**
