@@ -7,6 +7,7 @@ import Business.game.ChessGameEngine;
 import GUI.ChessGraveyard;
 import GUI.ChessPanel;
 import GUI.board.ChessGameBoard;
+import util.LegalMoves;
 
 import javax.swing.*;
 import java.awt.*;
@@ -28,6 +29,7 @@ public abstract class ChessGamePiece {
     private ColorOfPiece colorOfPiece;
     protected IsEnemy isEnemy;
     private ImageIcon pieceImage;
+    private LegalMoves legal;
     /**
      * The list of possible moves for this piece. Updated when actions involving
      * this piece occur. (created, moved, selected, etc)
@@ -298,19 +300,7 @@ public abstract class ChessGamePiece {
      */
     public boolean hasLegalMoves(ChessGameBoard board) {
         updatePossibleMoves(board);
-        if (IsOnScreen.invoke(pieceRow, pieceColumn)) {
-            for (String locStr : possibleMoves) {
-                String[] currCoords = locStr.split(",");
-                int row = Integer.parseInt(currCoords[0]);
-                int col = Integer.parseInt(currCoords[1]);
-                if (canMove(board, row, col)) // only show legal moves
-                {
-                    return true;
-                }
-            }
-            return false;
-        }
-        return false;
+        return LegalMoves.returnLegalMoves(this,pieceRow,pieceColumn,possibleMoves,board);
     }
 
     /**
