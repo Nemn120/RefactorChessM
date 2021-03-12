@@ -1,6 +1,7 @@
 package Business.pieces;
 
 import Business.pieces.service.IPieceImage;
+import Business.pieces.service.PieceImageImpl;
 import GUI.board.ChessGameBoard;
 
 import javax.swing.*;
@@ -16,7 +17,7 @@ import java.util.ArrayList;
  * @version 2010.11.17
  */
 public class Rook
-    extends ChessGamePiece implements IPieceImage{
+    extends ChessGamePiece {
     // private ArrayList<String> possibleMoves;
     // ----------------------------------------------------------
     /**
@@ -33,7 +34,7 @@ public class Rook
      */
     public Rook( ChessGameBoard board, int row, int col, int color ){
         super( board, row, col, color );
-        pieceImage=createImageByPieceType();
+        pieceImage=new PieceImageImpl().createImageByPieceType("Rook",color);
     }
     /**
      * Calculates the possible moves for this Rook.
@@ -58,6 +59,7 @@ public class Rook
      *
      * @return ImageIcon the ImageIcon representation of this piece.
      */
+    /*
     @Override
     public ImageIcon createImageByPieceType(){
         if ( getColorOfPiece() == ChessGamePiece.WHITE ){
@@ -77,4 +79,6 @@ public class Rook
             );        
         }
     }
+
+     */
 }

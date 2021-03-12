@@ -1,6 +1,7 @@
 package Business.pieces;
 
 import Business.pieces.service.IPieceImage;
+import Business.pieces.service.PieceImageImpl;
 import GUI.board.ChessGameBoard;
 
 import javax.swing.*;
@@ -18,7 +19,7 @@ import java.util.ArrayList;
  * @version 2010.11.17
  */
 public class Pawn
-    extends ChessGamePiece implements IPieceImage {
+    extends ChessGamePiece{
     private boolean notMoved;
     // ----------------------------------------------------------
     /**
@@ -35,9 +36,11 @@ public class Pawn
      */
     public Pawn(ChessGameBoard board, int row, int col, int color ){
         super( board, row, col, color);
-        pieceImage=createImageByPieceType();
+
         notMoved = true;
         possibleMoves = calculatePossibleMoves( board );
+
+        pieceImage=new PieceImageImpl().createImageByPieceType("Pawn",color);
     }
     /**
      * Moves this pawn to a row and col
@@ -129,6 +132,7 @@ public class Pawn
      *
      * @return ImageIcon the ImageIcon representation of this piece.
      */
+    /*
     @Override
     public ImageIcon createImageByPieceType(){
         if ( getColorOfPiece() == ChessGamePiece.WHITE ){
@@ -148,4 +152,6 @@ public class Pawn
             );           
         }
     }
+
+     */
 }

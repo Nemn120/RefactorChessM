@@ -1,6 +1,7 @@
 package Business.pieces;
 
 import Business.pieces.service.IPieceImage;
+import Business.pieces.service.PieceImageImpl;
 import GUI.board.ChessGameBoard;
 
 import javax.swing.*;
@@ -16,7 +17,7 @@ import java.util.ArrayList;
  * @version 2010.11.17
  */
 public class King
-    extends ChessGamePiece implements IPieceImage{
+    extends ChessGamePiece{
     // ----------------------------------------------------------
     /**
      * Create a new King object.
@@ -33,7 +34,8 @@ public class King
     public King( ChessGameBoard board, int row, int col, int color ){
 
         super( board, row, col, color, false );
-        pieceImage=createImageByPieceType();
+
+        pieceImage=new PieceImageImpl().createImageByPieceType("King",color);
     }
     /**
      * Calculates the possible moves for this piece. These are ALL the possible
@@ -79,6 +81,8 @@ public class King
      *
      * @return ImageIcon the ImageIcon representation of this piece.
      */
+
+    /*
     @Override
     public ImageIcon createImageByPieceType(){
         if ( getColorOfPiece() == ChessGamePiece.WHITE ){
@@ -97,5 +101,5 @@ public class King
                 getClass().getResource("/ChessImages/default-Unassigned.gif" )
             );            
         }
-    }
+    }*/
 }
