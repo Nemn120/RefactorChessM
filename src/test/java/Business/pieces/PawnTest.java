@@ -22,12 +22,6 @@ public class PawnTest {
         pawnBlack=new Pawn(ChessPanel.getGameBoard(),1,1,0);//row=1;col=[0,7];color=0 black
         pawnWhite=new Pawn(ChessPanel.getGameBoard(),6,1,1);//row=6;col=[0,7];color=1 white
     }
-/*
-    @Test
-    public void TestMovePawnBlack(){
-        Assert.assertTrue(pawnBlack.move(ChessPanel.getGameBoard(),3,0));
-    }
-*/
 
     @Test
     public void TestMovePawnBlack1(){

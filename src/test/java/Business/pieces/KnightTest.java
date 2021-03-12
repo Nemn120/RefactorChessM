@@ -19,8 +19,7 @@ public class KnightTest {
         chessGameBoard=new ChessGameBoard();
         caballoBlack=new Knight(chessGameBoard,0,1,0);//row=0; col=1,6; color=0 black
     }
-
-
+    /*
     @Test
     public void testCalculatePossibleMovesBlack(){
         ArrayList<String> esperado=new ArrayList<>();
@@ -34,5 +33,5 @@ public class KnightTest {
 
         Assert.assertArrayEquals(esperado.toArray(),actual.toArray());
     }
-
+    */
 }
