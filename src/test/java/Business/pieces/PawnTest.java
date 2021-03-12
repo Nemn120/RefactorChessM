@@ -1,5 +1,7 @@
 package Business.pieces;
 
+import Business.game.ChessGameEngine;
+import GUI.ChessPanel;
 import GUI.board.ChessGameBoard;
 import org.junit.Assert;
 import org.junit.Before;
@@ -11,34 +13,50 @@ public class PawnTest {
 
     Pawn pawnBlack;
     Pawn pawnWhite;
+    ChessPanel ChessPanel;
 
     @Before
     public void before(){
-        pawnBlack=new Pawn(new ChessGameBoard(),1,1,0);//row=1;col=1,2,..;color=0 black
-        pawnWhite=new Pawn(new ChessGameBoard(),6,1,1);//row=6;col=1,2..,6;color=1 white
-    }
 
+        ChessPanel=new ChessPanel();
+        pawnBlack=new Pawn(ChessPanel.getGameBoard(),1,1,0);//row=1;col=[0,7];color=0 black
+        pawnWhite=new Pawn(ChessPanel.getGameBoard(),6,1,1);//row=6;col=[0,7];color=1 white
+    }
+/*
     @Test
     public void TestMovePawnBlack(){
-        System.out.println("pawnBlack: "+pawnBlack.move(new ChessGameBoard(),1,4));
-        Assert.assertTrue(pawnBlack.move(new ChessGameBoard(),1,4));
+        Assert.assertTrue(pawnBlack.move(ChessPanel.getGameBoard(),3,0));
     }
+*/
 
     @Test
     public void TestMovePawnBlack2(){
-        System.out.println("pawnBlack2: "+pawnBlack.move(new ChessGameBoard(),1,4));
-        Assert.assertFalse(pawnBlack.move(new ChessGameBoard(),1,4));
+
+        ChessPanel.getGameBoard().clearCell(6,1);
+        ChessPanel.getGameBoard().clearCell(7,1);
+
+        pawnBlack.move(ChessPanel.getGameBoard(),3,1);
+        pawnBlack.move(ChessPanel.getGameBoard(),4,1);
+        pawnBlack.move(ChessPanel.getGameBoard(),5,1);
+        pawnBlack.move(ChessPanel.getGameBoard(),6,1);
+
+        Assert.assertTrue(pawnBlack.move(ChessPanel.getGameBoard(),7,1));
+
+    }
+
+    @Test
+    public void TestMovePawnBlack3(){
+        Assert.assertFalse(pawnBlack.move(ChessPanel.getGameBoard(),0,1));
     }
 
     @Test
     public void TestMovePawnWhite(){
-        System.out.println("pawnWhite: "+pawnWhite.move(new ChessGameBoard(),1,4));
-        Assert.assertTrue(pawnWhite.move(new ChessGameBoard(),1,4));
-    }
-    @Test
-    public void TestMovePawnWhite2(){
-        System.out.println("pawnWhite2: "+pawnWhite.move(new ChessGameBoard(),1,4));
-        Assert.assertFalse(pawnWhite.move(new ChessGameBoard(),1,4));
+
+        pawnWhite.move(ChessPanel.getGameBoard(),5,1);
+        pawnWhite.move(ChessPanel.getGameBoard(),4,1);
+        pawnWhite.move(ChessPanel.getGameBoard(),3,1);
+        Assert.assertTrue(pawnWhite.move(ChessPanel.getGameBoard(),2,1));
+
     }
 
 }
