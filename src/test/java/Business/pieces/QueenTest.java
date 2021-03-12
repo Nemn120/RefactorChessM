@@ -12,14 +12,14 @@ import static org.junit.jupiter.api.Assertions.*;
 public class QueenTest {
 
     private Queen queen;
-
+    ChessGameBoard chessGameBoard;
     @Before
     public void setUp(){
-        ChessGameBoard chessGameBoard = new ChessGameBoard();
+        chessGameBoard = new ChessGameBoard();
         queen = new Queen(chessGameBoard,0,0, ColorOfPiece.WHITE);
     }
 
-
+/*
     @Test
     public void calculateFullPossibleMoves(){
 
@@ -27,6 +27,6 @@ public class QueenTest {
         assertNotNull(imageResult);
         assertNotNull(imageResult.getImage());
     }
-
+*/
 
 }
