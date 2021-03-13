@@ -1,14 +1,11 @@
 package Business.pieces;
 
-import Business.Service.Moves.Impl.*;
-import Business.Service.Moves.ICalculateNorthEastMoves;
-import Business.Service.Moves.ICalculateNorthWestMoves;
-import Business.Service.Moves.ICalculateSouthEastMoves;
-import Business.Service.Moves.ICalculateSouthWestMoves;
+import Business.service.moves.pieces.CreateMoveService;
+import Business.service.moves.pieces.PieceMove;
 import GUI.board.ChessGameBoard;
+import util.ColorOfPiece;
 
 import javax.swing.*;
-import java.util.ArrayList;
 
 /**
  * Class to represent the Bishop piece.
@@ -20,52 +17,15 @@ import java.util.ArrayList;
  */
 public class Bishop extends ChessGamePiece {
 
-    private ICalculateNorthWestMoves calculateNorthWestMoves;
-    private ICalculateNorthEastMoves calculateNorthEastMoves;
-    private ICalculateSouthWestMoves calculateSouthWestMoves;
-    private ICalculateSouthEastMoves calculateSouthEastMoves;
-
-    /**
-     * Creates a new Bishop object.
-     *
-     * @param board board the board to create the bishop on
-     * @param row   row location of the Bishop
-     * @param col   col location of the Bishop
-     * @param color either GamePiece.WHITE, BLACK, or UNASSIGNED
-     */
     public Bishop(ChessGameBoard board, int row, int col, int color) {
         super(board, row, col, color);
-
+        pieceMove = new PieceMove(CreateMoveService.bishopMove(row,col,new ColorOfPiece(color)));
+        possibleMoves = pieceMove.calculateCardinalMoves(board,8);
     }
 
-    /**
-     * Calculates the possible moves for this piece. These are ALL the possible
-     * moves, including illegal (but at the same time valid) moves.
-     *
-     * @param board the game board to calculate moves on
-     * @return ArrayList<String> the moves
-     */
-    @Override
-    protected ArrayList<String> calculatePossibleMoves(ChessGameBoard board) {
-
-        this.calculateNorthWestMoves = new CalculateNorthWestMoves(pieceRow,pieceColumn);
-        ArrayList<String> northWestMoves = calculateNorthWestMoves.invoke(board,8,isEnemy);
-
-        this.calculateNorthEastMoves = new CalculateNorthEastMoves(pieceRow,pieceColumn);
-        ArrayList<String> northEastMoves = this.calculateNorthEastMoves.invoke(board,8,isEnemy);
-
-        this.calculateSouthWestMoves = new CalculateSouthWestMoves(pieceRow,pieceColumn);
-        ArrayList<String> southWestMoves = calculateSouthWestMoves.invoke(board, 8,isEnemy);
-
-        this.calculateSouthEastMoves = new CalculateSouthEastMoves(pieceRow,pieceColumn);
-        ArrayList<String> southEastMoves = calculateSouthEastMoves.invoke(board, 8,isEnemy);
-
-        ArrayList<String> allMoves = new ArrayList<String>();
-        allMoves.addAll(northEastMoves);
-        allMoves.addAll(northWestMoves);
-        allMoves.addAll(southEastMoves);
-        allMoves.addAll(southWestMoves);
-        return allMoves;
+    public void calculatePossibleMoves(ChessGameBoard board){
+        pieceMove = new PieceMove(CreateMoveService.bishopMove(pieceRow,pieceColumn,colorOfPiece));
+        possibleMoves = pieceMove.calculateCardinalMoves(board,8);
     }
 
     /**
@@ -79,4 +39,6 @@ public class Bishop extends ChessGamePiece {
                 getClass().getResource(resourceOfPiece.resourceByType("Bishop"))
         );
     }
+
+
 }
