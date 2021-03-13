@@ -11,46 +11,46 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class KnightTest {
+    Logger logger;
 
     Knight caballoBlack;
+    //Knight caballoWhite;
     ChessGameBoard chessGameBoard;
-    Logger logger;
 
     @Before
     public void before(){
         logger = Logger.getLogger(KnightTest.class.getName());
         chessGameBoard=new ChessGameBoard();
         caballoBlack=new Knight(chessGameBoard,0,1,0);//row=0; col=1,6; color=0 black
+        //caballoWhite=new Knight(chessGameBoard,7,1,0);//row=7; col=1,6; color=1 white
     }
 
-
-    @Test // TEST VALIDO
-    public void testCalculatePossibleMovesBlack(){
+    @Test
+    public void testCalculatePossibleMovesKnightBlack1(){
         List<String> esperado=new ArrayList<>();
         esperado.add("2,2");
         esperado.add("2,0");
 
         caballoBlack.calculatePossibleMoves(chessGameBoard);
-        logger.info("esperadoCaballoBlack: "+esperado);
-        logger.info("actualCaballoBlack: "+caballoBlack.getPossibleMoves());
 
+        logger.info("ExpectedKnightBlack: "+esperado);
+        logger.info("ActualKnightBlack: "+caballoBlack.getPossibleMoves());
         assertArrayEquals(esperado.toArray(),caballoBlack.getPossibleMoves().toArray());
     }
 
-    @Test // TEST INVALIDO
-    public void testCalculatePossibleErrorMoves(){
+    @Test
+    public void testCalculatePossibleMovesKnightBlack2(){
         List<String> esperado=new ArrayList<>();
-        esperado.add("2,1"); // ESTO ES FALSO
-        esperado.add("4,0"); // ESTO ES FALSO
+        esperado.add("2,2");
+        esperado.add("2,0");
+        esperado.add("1,3");
 
+        chessGameBoard.clearCell(1,3);
         caballoBlack.calculatePossibleMoves(chessGameBoard);
-        logger.info("esperadoCaballoBlack: "+esperado);
-        logger.info("actualCaballoBlack: "+caballoBlack.getPossibleMoves());
 
-        //assertArrayEquals(esperado.toArray(),caballoBlack.getPossibleMoves().toArray());
-        assertNotEquals(esperado.get(0),caballoBlack.getPossibleMoves().get(0));
-        assertNotEquals(esperado.get(1),caballoBlack.getPossibleMoves().get(1));
-
+        logger.info("ExpectedKnightBlack: "+esperado);
+        logger.info("ActualKnightBlack: "+caballoBlack.getPossibleMoves());
+        assertArrayEquals(esperado.toArray(),caballoBlack.getPossibleMoves().toArray());
     }
 
 }
