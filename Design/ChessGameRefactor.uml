@@ -3,21 +3,21 @@
   <ID>JAVA</ID>
   <OriginalElement>GUI.ChessGameLog</OriginalElement>
   <nodes>
-    <node x="108.0" y="605.0">Business.pieces.Rook</node>
-    <node x="208.0" y="605.0">Business.pieces.King</node>
-    <node x="308.0" y="605.0">Business.pieces.Knight</node>
-    <node x="524.0" y="605.0">Business.pieces.Bishop</node>
+    <node x="108.0" y="605.0">business.pieces.Rook</node>
+    <node x="208.0" y="605.0">business.pieces.King</node>
+    <node x="308.0" y="605.0">business.pieces.Knight</node>
+    <node x="524.0" y="605.0">business.pieces.Bishop</node>
     <node x="828.0" y="440.0">GUI.ChessGameLog</node>
     <node x="648.0" y="440.0">GUI.board.ChessGameBoard</node>
     <node x="260.82539682539675" y="160.0">javax.swing.TransferHandler.HasGetTransferHandler</node>
     <node x="0.0" y="680.0">GUI.ChessMain</node>
-    <node x="665.0" y="515.0">Business.game.ChessGameEngine</node>
+    <node x="665.0" y="515.0">business.game.ChessGameEngine</node>
     <node x="513.4285714285713" y="0.0">java.awt.image.ImageObserver</node>
-    <node x="424.0" y="605.0">Business.pieces.Pawn</node>
+    <node x="424.0" y="605.0">business.pieces.Pawn</node>
     <node x="344.0" y="440.0">GUI.board.BoardSquare</node>
     <node x="496.82539682539675" y="160.0">java.awt.Container</node>
     <node x="0.0" y="440.0">GUI.ChessMenuBar</node>
-    <node x="0.0" y="605.0">Business.pieces.Queen</node>
+    <node x="0.0" y="605.0">business.pieces.Queen</node>
     <node x="498.57142857142856" y="240.0">javax.swing.JComponent</node>
     <node x="779.5238095238094" y="240.0">javax.swing.ScrollPaneConstants</node>
     <node x="16.0" y="360.0">javax.swing.JMenuBar</node>
@@ -29,7 +29,7 @@
     <node x="31.90476190476187" y="240.0">javax.swing.MenuElement</node>
     <node x="685.4285714285713" y="0.0">java.io.Serializable</node>
     <node x="832.0" y="360.0">javax.swing.JScrollPane</node>
-    <node x="221.99999999999997" y="515.0">Business.pieces.ChessGamePiece</node>
+    <node x="221.99999999999997" y="515.0">business.pieces.ChessGamePiece</node>
     <node x="446.76190476190465" y="360.0">javax.swing.JPanel</node>
   </nodes>
   <notes />
@@ -40,7 +40,7 @@
       <point x="562.5714285714286" y="340.0" />
       <point x="0.0" y="15.0" />
     </edge>
-    <edge source="Business.pieces.Rook" target="Business.pieces.ChessGamePiece">
+    <edge source="business.pieces.Rook" target="business.pieces.ChessGamePiece">
       <point x="0.0" y="-15.0" />
       <point x="148.0" y="575.0" />
       <point x="262.0" y="575.0" />
@@ -70,7 +70,7 @@
       <point x="414.0" y="320.0" />
       <point x="0.0" y="15.0" />
     </edge>
-    <edge source="Business.pieces.Bishop" target="Business.pieces.ChessGamePiece">
+    <edge source="business.pieces.Bishop" target="business.pieces.ChessGamePiece">
       <point x="0.0" y="-15.0" />
       <point x="572.0" y="565.0" />
       <point x="368.66666666666663" y="565.0" />
@@ -88,7 +88,7 @@
       <point x="519.9047619047618" y="330.0" />
       <point x="-42.666666666666686" y="15.0" />
     </edge>
-    <edge source="Business.pieces.Pawn" target="Business.pieces.ChessGamePiece">
+    <edge source="business.pieces.Pawn" target="business.pieces.ChessGamePiece">
       <point x="0.0" y="-15.0" />
       <point x="464.0" y="575.0" />
       <point x="342.0" y="575.0" />
@@ -100,7 +100,7 @@
       <point x="99.90476190476187" y="310.0" />
       <point x="0.0" y="15.0" />
     </edge>
-    <edge source="Business.pieces.King" target="Business.pieces.ChessGamePiece">
+    <edge source="business.pieces.King" target="business.pieces.ChessGamePiece">
       <point x="0.0" y="-15.0" />
       <point x="248.0" y="585.0" />
       <point x="288.66666666666663" y="585.0" />
@@ -140,7 +140,7 @@
       <point x="417.42857142857133" y="55.0" />
       <point x="0.0" y="15.0" />
     </edge>
-    <edge source="Business.pieces.Knight" target="Business.pieces.ChessGamePiece">
+    <edge source="business.pieces.Knight" target="business.pieces.ChessGamePiece">
       <point x="0.0" y="-15.0" />
       <point x="356.0" y="585.0" />
       <point x="315.33333333333337" y="585.0" />
@@ -152,7 +152,7 @@
       <point x="721.4285714285713" y="55.0" />
       <point x="-36.0" y="15.0" />
     </edge>
-    <edge source="Business.pieces.Queen" target="Business.pieces.ChessGamePiece">
+    <edge source="business.pieces.Queen" target="business.pieces.ChessGamePiece">
       <point x="0.0" y="-15.0" />
       <point x="44.0" y="565.0" />
       <point x="235.3333333333333" y="565.0" />

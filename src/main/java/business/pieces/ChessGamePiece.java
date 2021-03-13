@@ -1,4 +1,4 @@
-package business.pieces;
+package Business.pieces;
 
 import util.ColorOfPiece;
 import util.IsEnemy;
