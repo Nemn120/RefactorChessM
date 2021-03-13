@@ -4,12 +4,6 @@ import Business.pieces.ChessGamePiece;
 import GUI.board.ChessGameBoard;
 
 public class IsEnemy {
-    
-    private int pieceColor;
-
-    public IsEnemy(int pieceColor) {
-        this.pieceColor = pieceColor;
-    }
 
     /**
      * Determines if the row and column contains an enemy piece. This is defined
@@ -21,7 +15,7 @@ public class IsEnemy {
      * @param board the board to check
      * @return true if it is an enemy piece, false if not
      */
-    public boolean invoke(ChessGameBoard board, int row, int col) {
+    public static boolean invoke(ChessGameBoard board, int row, int col, int pieceColor) {
         if (row > 7 || col > 7 || row < 0 || col < 0) {
             return false;
         }

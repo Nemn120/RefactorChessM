@@ -1,5 +1,9 @@
 package Business.game;
 
+import Business.service.king.IKingService;
+import Business.service.king.KingService;
+import Business.service.moves.IPieceMoveService;
+import Business.service.moves.impl.PieceMoveServiceImpl;
 import util.ColorOfPiece;
 import Business.pieces.ChessGamePiece;
 import Business.pieces.King;
@@ -27,6 +31,8 @@ public class ChessGameEngine {
     private boolean firstClick;
     private int currentPlayer;
     private ChessGameBoard board;
+    private IPieceMoveService pieceMoveService;
+    private IKingService kingService;
     private King king1;
     private King king2;
 
@@ -47,7 +53,34 @@ public class ChessGameEngine {
                 "A new chess "
                         + "game has been started. Player 1 (white) will play "
                         + "against Player 2 (black). BEGIN!");
+
+        pieceMoveService = new PieceMoveServiceImpl();
+        kingService = new KingService(board,pieceMoveService);
     }
+
+    /**
+     * Determines if the requested player has legal moves.
+     *
+     * @param playerNum the player to check
+     * @return boolean true if the player does have legal moves, false otherwise
+     */
+    public boolean playerHasLegalMoves(int playerNum) {
+        ArrayList<ChessGamePiece> pieces;
+        if (playerNum == 1) {
+            pieces = board.getAllWhitePieces();
+        } else if (playerNum == 2) {
+            pieces = board.getAllBlackPieces();
+        } else {
+            return false;
+        }
+        for (ChessGamePiece currPiece : pieces) {
+            if (pieceMoveService.hasLegalMoves(board,currPiece)) {
+                return true;
+            }
+        }
+        return false;
+    }
+//_____________________________________________________________________________________________________________________
 
     /**
      * Resets the game to its original state.
@@ -69,15 +102,6 @@ public class ChessGameEngine {
     }
 
     /**
-     * Switches the turn to be the next player's turn.
-     */
-    private void nextTurn() {
-        currentPlayer = (currentPlayer == 1) ? 2 : 1;
-        ((ChessPanel) board.getParent()).getGameLog().addToLog(
-                "It is now Player " + currentPlayer + "'s turn.");
-    }
-
-    /**
      * Gets the current player. Used for determining the turn.
      *
      * @return int the current player (1 or 2)
@@ -86,27 +110,14 @@ public class ChessGameEngine {
         return currentPlayer;
     }
 
+
     /**
-     * Determines if the requested player has legal moves.
-     *
-     * @param playerNum the player to check
-     * @return boolean true if the player does have legal moves, false otherwise
+     * Switches the turn to be the next player's turn.
      */
-    public boolean playerHasLegalMoves(int playerNum) {
-        ArrayList<ChessGamePiece> pieces;
-        if (playerNum == 1) {
-            pieces = board.getAllWhitePieces();
-        } else if (playerNum == 2) {
-            pieces = board.getAllBlackPieces();
-        } else {
-            return false;
-        }
-        for (ChessGamePiece currPiece : pieces) {
-            if (currPiece.hasLegalMoves(board)) {
-                return true;
-            }
-        }
-        return false;
+    private void nextTurn() {
+        currentPlayer = (currentPlayer == 1) ? 2 : 1;
+        ((ChessPanel) board.getParent()).getGameLog().addToLog(
+                "It is now Player " + currentPlayer + "'s turn.");
     }
 
     /**
@@ -146,14 +157,14 @@ public class ChessGameEngine {
     public boolean isKingInCheck(boolean checkCurrent) {
         if (checkCurrent) {
             if (currentPlayer == 1) {
-                return king1.isChecked(board);
+                return kingService.isChecked(king1);
             }
-            return king2.isChecked(board);
+            return kingService.isChecked(king2);
         } else {
             if (currentPlayer == 2) {
-                return king1.isChecked(board);
+                return kingService.isChecked(king1);
             }
-            return king2.isChecked(board);
+            return kingService.isChecked(king2);
         }
     }
 
@@ -217,18 +228,18 @@ public class ChessGameEngine {
      * still valid game.
      */
     public int determineGameLost() {
-        if (king1.isChecked(board) && !playerHasLegalMoves(1)) // player 1
+        if (kingService.isChecked(king1) && !playerHasLegalMoves(1)) // player 1
         // loss
         {
             return 1;
         }
-        if (king2.isChecked(board) && !playerHasLegalMoves(2)) // player 2
+        if (kingService.isChecked(king2) && !playerHasLegalMoves(2)) // player 2
         // loss
         {
             return 2;
         }
-        if ((!king1.isChecked(board) && !playerHasLegalMoves(1))
-                || (!king2.isChecked(board) && !playerHasLegalMoves(2))
+        if ((!kingService.isChecked(king1) && !playerHasLegalMoves(1))
+                || (!kingService.isChecked(king2) && !playerHasLegalMoves(2))
                 || (board.getAllWhitePieces().size() == 1 &&
                 board.getAllBlackPieces().size() == 1)) // stalemate
         {
@@ -252,7 +263,7 @@ public class ChessGameEngine {
         if (firstClick) {
             currentPiece = squareClicked.getPieceOnSquare();
             if (selectedPieceIsValid()) {
-                currentPiece.showLegalMoves(board);
+                pieceMoveService.showLegalMoves(board,currentPiece);
                 squareClicked.setBackground(Color.GREEN);
                 firstClick = false;
             } else {
@@ -277,10 +288,8 @@ public class ChessGameEngine {
                     !pieceOnSquare.equals(currentPiece)) // moving
             {
                 boolean moveSuccessful =
-                        currentPiece.move(
-                                board,
-                                squareClicked.getRow(),
-                                squareClicked.getColumn());
+                        pieceMoveService.move(
+                                board,currentPiece,squareClicked.getRow(), squareClicked.getColumn());
                 if (moveSuccessful) {
                     checkGameConditions();
                 } else {
