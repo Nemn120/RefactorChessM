@@ -1,4 +1,4 @@
-package Business.pieces;
+package business.pieces;
 
 import business.service.moves.ICalculateNorthEastMoves;
 import business.service.moves.ICalculateNorthWestMoves;
