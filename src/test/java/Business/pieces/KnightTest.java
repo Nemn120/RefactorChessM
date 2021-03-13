@@ -25,7 +25,7 @@ public class KnightTest {
     }
 
 
-    @Test
+    @Test // TEST VALIDO
     public void testCalculatePossibleMovesBlack(){
         List<String> esperado=new ArrayList<>();
         esperado.add("2,2");
@@ -36,6 +36,22 @@ public class KnightTest {
         logger.info("actualCaballoBlack: "+caballoBlack.getPossibleMoves());
 
         assertArrayEquals(esperado.toArray(),caballoBlack.getPossibleMoves().toArray());
+    }
+
+    @Test // TEST INVALIDO
+    public void testCalculatePossibleErrorMoves(){
+        List<String> esperado=new ArrayList<>();
+        esperado.add("2,1"); // ESTO ES FALSO
+        esperado.add("4,0"); // ESTO ES FALSO
+
+        caballoBlack.calculatePossibleMoves(chessGameBoard);
+        logger.info("esperadoCaballoBlack: "+esperado);
+        logger.info("actualCaballoBlack: "+caballoBlack.getPossibleMoves());
+
+        //assertArrayEquals(esperado.toArray(),caballoBlack.getPossibleMoves().toArray());
+        assertNotEquals(esperado.get(0),caballoBlack.getPossibleMoves().get(0));
+        assertNotEquals(esperado.get(1),caballoBlack.getPossibleMoves().get(1));
+
     }
 
 }
