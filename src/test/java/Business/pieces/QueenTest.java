@@ -1,7 +1,7 @@
-package Business.pieces;
+package business.pieces;
 
 import util.ColorOfPiece;
-import GUI.board.ChessGameBoard;
+import gui.board.ChessGameBoard;
 import org.junit.Before;
 import org.junit.Test;
 
