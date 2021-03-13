@@ -1,9 +1,9 @@
-package Business.pieces;
+package business.pieces;
 
 import util.ColorOfPiece;
 import util.IsEnemy;
 import util.IsOnScreen;
-import Business.game.ChessGameEngine;
+import business.game.ChessGameEngine;
 import GUI.ChessGraveyard;
 import GUI.ChessPanel;
 import GUI.board.ChessGameBoard;

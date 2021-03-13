@@ -1,9 +1,8 @@
 package util;
 import java.util.ArrayList;
 
-import Business.pieces.ChessGamePiece;
+import business.pieces.ChessGamePiece;
 import GUI.board.ChessGameBoard;
-import util.IsOnScreen;
 
 public class LegalMoves {
     public static boolean returnLegalMoves(ChessGamePiece piece, int pieceRow, int pieceColumn, ArrayList<String> possibleMoves, ChessGameBoard board){

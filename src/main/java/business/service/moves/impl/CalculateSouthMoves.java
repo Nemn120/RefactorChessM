@@ -1,6 +1,6 @@
-package Business.Service.Moves.Impl;
+package business.service.moves.impl;
 
-import Business.Service.Moves.ICalculateSouthMoves;
+import business.service.moves.ICalculateSouthMoves;
 import util.IsEnemy;
 import util.IsOnScreen;
 import GUI.board.ChessGameBoard;

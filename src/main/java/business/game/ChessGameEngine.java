@@ -1,8 +1,8 @@
-package Business.game;
+package business.game;
 
 import util.ColorOfPiece;
-import Business.pieces.ChessGamePiece;
-import Business.pieces.King;
+import business.pieces.ChessGamePiece;
+import business.pieces.King;
 import GUI.ChessPanel;
 import GUI.board.BoardSquare;
 import GUI.board.ChessGameBoard;

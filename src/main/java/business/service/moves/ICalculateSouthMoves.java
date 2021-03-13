@@ -1,4 +1,4 @@
-package Business.Service.Moves;
+package business.service.moves;
 
 public interface ICalculateSouthMoves extends ICalculateMove{
 

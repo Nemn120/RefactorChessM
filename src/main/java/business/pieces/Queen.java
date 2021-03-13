@@ -1,9 +1,7 @@
-package Business.pieces;
+package business.pieces;
 
-import Business.Service.Moves.*;
-import Business.Service.Moves.Impl.*;
+import business.service.moves.*;
 import GUI.board.ChessGameBoard;
-import util.ColorOfPiece;
 
 import javax.swing.*;
 import java.util.ArrayList;

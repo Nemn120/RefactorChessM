@@ -1,4 +1,4 @@
-package Business.pieces;
+package business.pieces;
 
 import util.IsOnScreen;
 import GUI.board.ChessGameBoard;

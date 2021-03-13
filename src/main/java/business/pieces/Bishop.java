@@ -1,12 +1,10 @@
-package Business.pieces;
+package business.pieces;
 
-import Business.Service.Moves.Impl.*;
-import Business.Service.Moves.ICalculateNorthEastMoves;
-import Business.Service.Moves.ICalculateNorthWestMoves;
-import Business.Service.Moves.ICalculateSouthEastMoves;
-import Business.Service.Moves.ICalculateSouthWestMoves;
+import business.service.moves.ICalculateNorthEastMoves;
+import business.service.moves.ICalculateNorthWestMoves;
+import business.service.moves.ICalculateSouthEastMoves;
+import business.service.moves.ICalculateSouthWestMoves;
 import GUI.board.ChessGameBoard;
-import util.ColorOfPiece;
 
 import javax.swing.*;
 import java.util.ArrayList;

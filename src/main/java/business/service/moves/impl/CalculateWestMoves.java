@@ -1,18 +1,18 @@
-package Business.Service.Moves.Impl;
+package business.service.moves.impl;
 
-import Business.Service.Moves.ICalculateNorthMoves;
+import business.service.moves.ICalculateWestMoves;
 import util.IsEnemy;
 import util.IsOnScreen;
 import GUI.board.ChessGameBoard;
 
 import java.util.ArrayList;
 
-public class CalculateNorthMoves implements ICalculateNorthMoves {
+public class CalculateWestMoves implements ICalculateWestMoves {
 
     private int pieceRow;
     private int pieceColumn;
 
-    public CalculateNorthMoves(int pieceRow, int pieceColumn) {
+    public CalculateWestMoves(int pieceRow, int pieceColumn) {
         this.pieceRow = pieceRow;
         this.pieceColumn = pieceColumn;
     }
@@ -22,12 +22,12 @@ public class CalculateNorthMoves implements ICalculateNorthMoves {
         ArrayList<String> moves = new ArrayList<String>();
         int count = 0;
         if (IsOnScreen.invoke(pieceRow,pieceColumn)) {
-            for (int i = pieceRow - 1; i >= 0 && count < numMoves; i--) {
-                if ((board.getCell(i, pieceColumn).getPieceOnSquare()
-                        == null || isEnemy.invoke(board, i, pieceColumn))) {
-                    moves.add(i + "," + pieceColumn);
+            for (int i = pieceColumn - 1; i >= 0 && count < numMoves; i--) {
+                if ((board.getCell(pieceRow, i).getPieceOnSquare()
+                        == null || isEnemy.invoke(board, pieceRow, i))) {
+                    moves.add(pieceRow + "," + i);
                     count++;
-                    if (isEnemy.invoke(board, i, pieceColumn)) {
+                    if (isEnemy.invoke(board, pieceRow, i)) {
                         break;
                     }
                 } else {
