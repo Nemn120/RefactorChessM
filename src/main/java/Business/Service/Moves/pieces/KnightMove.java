@@ -1,7 +1,7 @@
-package Business.service.moves.pieces;
+package business.service.moves.pieces;
 
-import Business.service.moves.cardinal.ICalculateCardinalKnightMove;
-import GUI.board.ChessGameBoard;
+import business.service.moves.cardinal.ICalculateCardinalKnightMove;
+import gui.board.ChessGameBoard;
 import util.IsOnScreen;
 
 import java.util.ArrayList;

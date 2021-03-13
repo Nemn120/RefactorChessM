@@ -1,7 +1,7 @@
-package Business.service.moves.cardinal.Impl;
+package business.service.moves.cardinal.impl;
 
-import Business.service.moves.cardinal.ICalculateCardinalKnightMove;
-import GUI.board.ChessGameBoard;
+import business.service.moves.cardinal.ICalculateCardinalKnightMove;
+import gui.board.ChessGameBoard;
 import util.ColorOfPiece;
 import util.IsEnemy;
 import util.IsOnScreen;

@@ -1,7 +1,7 @@
 package util;
 
-import Business.pieces.ChessGamePiece;
-import GUI.board.ChessGameBoard;
+import business.pieces.ChessGamePiece;
+import gui.board.ChessGameBoard;
 
 public class IsEnemy {
 

@@ -1,6 +1,6 @@
-package Business.service.moves.cardinal;
+package business.service.moves.cardinal;
 
-import GUI.board.ChessGameBoard;
+import gui.board.ChessGameBoard;
 
 import java.util.ArrayList;
 

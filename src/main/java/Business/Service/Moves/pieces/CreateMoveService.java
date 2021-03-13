@@ -1,8 +1,8 @@
-package Business.service.moves.pieces;
+package business.service.moves.pieces;
 
-import Business.service.moves.cardinal.CalculateCardinalMove;
-import Business.service.moves.cardinal.ICalculateCardinalKnightMove;
-import Business.service.moves.cardinal.Impl.*;
+import business.service.moves.cardinal.CalculateCardinalMove;
+import business.service.moves.cardinal.ICalculateCardinalKnightMove;
+import business.service.moves.cardinal.impl.*;
 import util.ColorOfPiece;
 
 import java.util.ArrayList;

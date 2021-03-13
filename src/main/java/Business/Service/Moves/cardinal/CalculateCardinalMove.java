@@ -1,4 +1,4 @@
-package Business.service.moves.cardinal;
+package business.service.moves.cardinal;
 
 import util.ColorOfPiece;
 
