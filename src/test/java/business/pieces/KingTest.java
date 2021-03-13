@@ -1,6 +1,6 @@
-package Business.pieces;
+package business.pieces;
 
-import GUI.board.ChessGameBoard;
+import gui.board.ChessGameBoard;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

@@ -1,6 +1,6 @@
-package Business.pieces;
+package business.pieces;
 
-import GUI.board.ChessGameBoard;
+import gui.board.ChessGameBoard;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -17,7 +17,7 @@ public class RookTest {
 
     @Before
     public void before(){
-        logger = Logger.getLogger(BishopTest.class.getName());
+        logger = Logger.getLogger(RookTest.class.getName());
 
         chessGameBoard=new ChessGameBoard();
         rookBlack=new Rook(chessGameBoard,0,0,0);//row=0; col=0,7; color=0 black

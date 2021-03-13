@@ -1,8 +1,11 @@
-package Business.pieces;
+package business.pieces;
 
 import business.service.moves.IPieceMoveService;
 import business.service.moves.impl.PieceMoveServiceImpl;
+import business.service.moves.pieces.PawnMove;
 import gui.ChessPanel;
+import gui.board.ChessGameBoard;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -13,14 +16,15 @@ public class PawnTest {
     Logger logger;
 
     Pawn pawnBlack;
-    //Pawn pawnWhite;
     ChessGameBoard chessGameBoard;
+    IPieceMoveService pieceMoveService;
 
     @Before
     public void setUp(){
         logger = Logger.getLogger(PawnTest.class.getName());
 
         chessGameBoard=new ChessGameBoard();
+        pieceMoveService = new PieceMoveServiceImpl();
         pawnBlack=new Pawn(chessGameBoard,1,1,0);//row=1;col=[0,7];color=0 black
         //pawnWhite=new Pawn(chessGameBoard,6,1,1);//row=6;col=[0,7];color=1 white
 
@@ -45,16 +49,4 @@ public class PawnTest {
         pawnBlack.setNotMoved(true);
         Assert.assertTrue(pawnBlack.isNotMoved());
     }
-
-    @Test
-    public void TestMovePawnWhite(){
-        
-        pawnWhite.move(chessPanel.getGameBoard(),5,1);
-        pawnWhite.move(chessPanel.getGameBoard(),4,1);
-        pawnWhite.move(chessPanel.getGameBoard(),3,1);
-
-        Assert.assertTrue(pawnWhite.move(chessPanel.getGameBoard(),2,1));//enemigo black
-
-    }
-*/
 }
