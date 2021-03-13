@@ -2,7 +2,6 @@ package Business.service.king;
 
 import Business.service.moves.IPieceMoveService;
 import Business.pieces.ChessGamePiece;
-import Business.service.moves.impl.PieceMoveServiceImpl;
 import GUI.board.ChessGameBoard;
 import util.ColorOfPiece;
 

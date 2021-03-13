@@ -6,7 +6,6 @@ import GUI.board.ChessGameBoard;
 
 import javax.swing.*;
 import java.util.ArrayList;
-// -------------------------------------------------------------------------
 
 /**
  * Represents a Knight game piece.

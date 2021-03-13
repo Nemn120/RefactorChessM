@@ -1,11 +1,6 @@
 package Business.pieces;
 
-import Business.service.moves.pieces.CreateMoveService;
 import Business.service.moves.pieces.PawnMove;
-import Business.service.moves.pieces.PieceMove;
-import util.ColorOfPiece;
-import util.IsEnemy;
-import util.IsOnScreen;
 import GUI.board.ChessGameBoard;
 
 import javax.swing.*;

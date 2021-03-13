@@ -21,7 +21,7 @@ public class QueenTest {
 
 
     @Test
-    public void calculateFullPossibleMoves(){
+    public void imageNotNullTest(){
 
         ImageIcon imageResult = queen.createImageByPieceType();
         assertNotNull(imageResult);

@@ -3,9 +3,9 @@ package Business.pieces;
 import Business.service.moves.pieces.PieceMove;
 import util.ColorOfPiece;
 import GUI.board.ChessGameBoard;
+import util.ResourceOfPiece;
 
 import javax.swing.*;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -24,6 +24,7 @@ public abstract class ChessGamePiece {
     protected ColorOfPiece colorOfPiece;
     protected ImageIcon pieceImage;
     protected PieceMove pieceMove;
+    protected ResourceOfPiece resourceOfPiece;
     /**
      * The list of possible moves for this piece. Updated when actions involving
      * this piece occur. (created, moved, selected, etc)
@@ -49,7 +50,7 @@ public abstract class ChessGamePiece {
     public ChessGamePiece(ChessGameBoard board, int row, int col, int pieceColor) {
         skipMoveGeneration = false;
         this.colorOfPiece = new ColorOfPiece(pieceColor);
-        this.isEnemy=new IsEnemy(pieceColor);
+        this.resourceOfPiece = new ResourceOfPiece(pieceColor);
         pieceImage = createImageByPieceType();
         pieceRow = row;
         pieceColumn = col;
@@ -72,6 +73,7 @@ public abstract class ChessGamePiece {
     public ChessGamePiece(ChessGameBoard board, int row, int col, int pieceColor, boolean skipMoveGeneration) {
         this.skipMoveGeneration = skipMoveGeneration;
         this.colorOfPiece = new ColorOfPiece(pieceColor);
+        this.resourceOfPiece = new ResourceOfPiece(pieceColor);
         pieceImage = this.createImageByPieceType();
         pieceRow = row;
         pieceColumn = col;
