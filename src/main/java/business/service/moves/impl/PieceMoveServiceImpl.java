@@ -154,20 +154,4 @@ public class PieceMoveServiceImpl implements IPieceMoveService {
         }
         return false;
     }
-
-    public boolean movePawn(ChessGameBoard board,ChessGamePiece piece ,int row,int col){
-        if (this.move(board,piece,row, col)) {
-            ((Pawn)piece).setNotMoved(false);
-            piece.calculatePossibleMoves(board);
-            if ((piece.getColorOfPiece().getColor() == ColorOfPiece.BLACK && row == 7)
-                    || (piece.getColorOfPiece().getColor() == ColorOfPiece.WHITE && row == 0)) { // pawn has reached the end of the board, promote it to queen
-                board.getCell(row, col).setPieceOnSquare(new Queen(
-                        board, row, col, piece.getColorOfPiece().getColor()));
-            }
-            return true;
-        }
-        return false;
-    }
-
-
 }
