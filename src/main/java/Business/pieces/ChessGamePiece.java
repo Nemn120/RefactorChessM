@@ -55,9 +55,6 @@ public abstract class ChessGamePiece {
         if (board.getCell(row, col) != null) {
             board.getCell(row, col).setPieceOnSquare(this);
         }
-        //pieceMove = new PieceMove()
-
-        //possibleMoves = pieceMove.calculatePossibleMoves(board);
     }
 
     /**
@@ -80,9 +77,6 @@ public abstract class ChessGamePiece {
         if (board.getCell(row, col) != null) {
             board.getCell(row, col).setPieceOnSquare(this);
         }
-       // if (!this.skipMoveGeneration) {
-        //    possibleMoves = calculatePossibleMoves(board);
-       // }
     }
     public static ImageIcon getImageIcon(String namePiece,int colorOfPiece){
         namePiece = namePiece.substring(16);
