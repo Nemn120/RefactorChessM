@@ -6,7 +6,6 @@ import GUI.board.ChessGameBoard;
 import util.ColorOfPiece;
 
 import javax.swing.*;
-import java.util.ArrayList;
 
 /**
  * Represents a King game piece.

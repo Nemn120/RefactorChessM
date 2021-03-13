@@ -22,14 +22,6 @@ public class PieceMove {
         return allMoves;
     }
 
-    public List<CalculateCardinalMove> getCalculateCardinalMoves() {
-        return calculateCardinalMoves;
-    }
-
-    public void setCalculateCardinalMoves(List<CalculateCardinalMove> calculateCardinalMoves) {
-        this.calculateCardinalMoves = calculateCardinalMoves;
-    }
-
     public List<String> calculateCardinalMove(CalculateCardinalMove cardinalMove, ChessGameBoard board, int numMoves){
         return cardinalMove.invoke(board,numMoves);
     }

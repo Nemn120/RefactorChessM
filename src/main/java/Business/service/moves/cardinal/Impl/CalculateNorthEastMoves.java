@@ -1,8 +1,6 @@
 package Business.service.moves.cardinal.Impl;
 
 import Business.service.moves.cardinal.CalculateCardinalMove;
-import Business.service.moves.cardinal.ICalculateMove;
-import Business.pieces.ChessGamePiece;
 import util.ColorOfPiece;
 import util.IsEnemy;
 import util.IsOnScreen;
@@ -16,14 +14,6 @@ public class CalculateNorthEastMoves extends CalculateCardinalMove {
         super(pieceRow,pieceColumn,colorOfPiece);
     }
 
-    /**
-     * Calculates and returns moves in the north-east direction relative to this
-     * piece.
-     *
-     * @param board    the board to calculate the moves on
-     * @param numMoves the number of moves to calculate
-     * @return ArrayList<String> the moves in this direction
-     */
     @Override
     public ArrayList<String> invoke(ChessGameBoard board, int numMoves) {
         ArrayList<String> moves = new ArrayList<String>();

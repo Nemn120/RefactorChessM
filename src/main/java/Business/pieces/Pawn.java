@@ -4,7 +4,6 @@ import Business.service.moves.pieces.PawnMove;
 import GUI.board.ChessGameBoard;
 
 import javax.swing.*;
-import java.util.ArrayList;
 
 /**
  * Represents a Pawn game piece. Unique in that it can move two locations on its

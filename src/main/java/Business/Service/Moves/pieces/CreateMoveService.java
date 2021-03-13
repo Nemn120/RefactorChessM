@@ -1,6 +1,7 @@
 package Business.service.moves.pieces;
 
 import Business.service.moves.cardinal.CalculateCardinalMove;
+import Business.service.moves.cardinal.ICalculateCardinalKnightMove;
 import Business.service.moves.cardinal.Impl.*;
 import util.ColorOfPiece;
 
@@ -30,4 +31,10 @@ public class CreateMoveService {
                 new CalculateEastMoves(pieceRow,pieceColumn,color),
                 new CalculateWestMoves(pieceRow,pieceColumn,color));
     }
+
+    public static List<ICalculateCardinalKnightMove> knightMove(int pieceRow, int pieceColumn, ColorOfPiece color){
+        return Arrays.asList(new CalculateKnightNorthMoves(pieceRow,pieceColumn,color),
+                new CalculateKnightSouthMoves(pieceRow,pieceColumn,color));
+    }
+
 }

@@ -10,21 +10,10 @@ import java.util.ArrayList;
 
 public class CalculateSouthEastMoves extends CalculateCardinalMove {
 
-    private int pieceRow;
-    private int pieceColumn;
-
     public CalculateSouthEastMoves(int pieceRow, int pieceColumn, ColorOfPiece colorOfPiece) {
         super(pieceRow,pieceColumn,colorOfPiece);
     }
 
-    /**
-     * Calculates and returns moves in the south-east direction relative to this
-     * piece.
-     *
-     * @param board    the board to calculate the moves on
-     * @param numMoves the number of moves to calculate
-     * @return ArrayList<String> the moves in this direction
-     */
     @Override
     public ArrayList<String> invoke(ChessGameBoard board, int numMoves) {
         ArrayList<String> moves = new ArrayList<String>();

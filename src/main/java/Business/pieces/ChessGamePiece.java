@@ -81,25 +81,7 @@ public abstract class ChessGamePiece {
             board.getCell(row, col).setPieceOnSquare(this);
         }
     }
-    public static ImageIcon getImageIcon(String namePiece,int colorOfPiece){
-        namePiece = namePiece.substring(16);
-        if ( colorOfPiece == ColorOfPiece.WHITE ){
-            return new ImageIcon(
-                ChessGamePiece.class.getResource("/ChessImages/White"+namePiece+".gif")
-            );
-        }
-        else if ( colorOfPiece == ColorOfPiece.BLACK ){
-            return new ImageIcon(
-                ChessGamePiece.class.getResource("/ChessImages/Black"+namePiece+".gif")
-            );
-        }
-        else
-        {
-            return new ImageIcon(
-                ChessGamePiece.class.getResource("/ChessImages/default-Unassigned.gif")
-            );
-        }
-    }
+
     public abstract void calculatePossibleMoves(ChessGameBoard board);
 
     /**

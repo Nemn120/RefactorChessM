@@ -1,8 +1,6 @@
 package Business.service.moves.cardinal.Impl;
 
 import Business.service.moves.cardinal.CalculateCardinalMove;
-import Business.service.moves.cardinal.ICalculateMove;
-import Business.pieces.ChessGamePiece;
 import util.ColorOfPiece;
 import util.IsEnemy;
 import util.IsOnScreen;

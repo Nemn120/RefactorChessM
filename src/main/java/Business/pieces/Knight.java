@@ -1,11 +1,11 @@
 package Business.pieces;
 
-import util.IsEnemy;
-import util.IsOnScreen;
+import Business.service.moves.pieces.CreateMoveService;
+import Business.service.moves.pieces.KnightMove;
+import util.ColorOfPiece;
 import GUI.board.ChessGameBoard;
 
 import javax.swing.*;
-import java.util.ArrayList;
 
 /**
  * Represents a Knight game piece.
@@ -16,6 +16,8 @@ import java.util.ArrayList;
  * @version 2010.11.17
  */
 public class Knight extends ChessGamePiece {
+
+    private KnightMove knightMove;
     /**
      * Knight constructor for gamePiece
      *
@@ -26,66 +28,16 @@ public class Knight extends ChessGamePiece {
      */
     public Knight(ChessGameBoard board, int row, int col, int color) {
         super(board, row, col, color);
-        calculatePossibleMoves(board);
+        knightMove = new KnightMove(CreateMoveService.knightMove(row,col,new ColorOfPiece(color)));
+        possibleMoves = knightMove.calculatePossibleMoves(board,row,col);
     }
 
-    /**
-     * Calculates the moves of the knight in the north direction relative to the
-     * location of the piece.
-     *
-     * @param board the board to check moves on
-     * @return ArrayList<String> a list of the possible moves
-     */
-    private ArrayList<String> calculateNorthMoves(ChessGameBoard board) {
-        ArrayList<String> moves = new ArrayList<String>();
-        for (int i = 2; i >= -2; i -= 4) {
-            for (int j = 1; j >= -1; j -= 2) {
-                if (IsOnScreen.invoke(pieceRow + i, pieceColumn + j)
-                        && (IsEnemy.invoke(board, pieceRow + i, pieceColumn + j,colorOfPiece.getColor()) ||
-                        board.getCell(
-                                pieceRow + i,
-                                pieceColumn + j)
-                                .getPieceOnSquare() == null)) {
-                    moves.add((pieceRow + i) + "," + (pieceColumn + j));
-                }
-            }
-        }
-        return moves;
-    }
-
-    /**
-     * Calculates the moves of the knight in the south direction relative to the
-     * location of the piece.
-     *
-     * @param board the board to check moves on
-     * @return ArrayList<String> a list of the possible moves
-     */
-    private ArrayList<String> calculateSouthMoves(ChessGameBoard board) {
-        ArrayList<String> moves = new ArrayList<String>();
-        for (int i = 1; i >= -1; i -= 2) {
-            for (int j = 2; j >= -2; j -= 4) {
-                if (IsOnScreen.invoke(pieceRow + i, pieceColumn + j)
-                        && (IsEnemy.invoke(board, pieceRow + i, pieceColumn + j,colorOfPiece.getColor()) ||
-                        board.getCell(
-                                pieceRow + i,
-                                pieceColumn + j)
-                                .getPieceOnSquare() == null)) {
-                    moves.add((pieceRow + i) + "," + (pieceColumn + j));
-                }
-            }
-        }
-        return moves;
-    }
-
-
+    @Override
     public void calculatePossibleMoves(ChessGameBoard board) {
-        ArrayList<String> moves = new ArrayList<String>();
-        if (IsOnScreen.invoke(pieceRow, pieceColumn)) {
-            moves.addAll(calculateNorthMoves(board));
-            moves.addAll(calculateSouthMoves(board));
-        }
-        possibleMoves = moves;
+        knightMove = new KnightMove(CreateMoveService.knightMove(pieceRow,pieceColumn,colorOfPiece));
+        possibleMoves = knightMove.calculatePossibleMoves(board,pieceRow,pieceColumn);
     }
+
 
     /**
      * Creates an icon for this piece depending on the piece's color.

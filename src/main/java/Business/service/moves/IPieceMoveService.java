@@ -1,10 +1,7 @@
 package Business.service.moves;
 
 import Business.pieces.ChessGamePiece;
-import Business.service.moves.pieces.PieceMove;
 import GUI.board.ChessGameBoard;
-
-import java.util.ArrayList;
 
 public interface IPieceMoveService {
 
