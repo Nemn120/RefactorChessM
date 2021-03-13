@@ -1,6 +1,6 @@
 package GUI;
 
-import Business.pieces.ChessGamePiece;
+import business.pieces.ChessGamePiece;
 
 import javax.swing.*;
 import java.awt.*;

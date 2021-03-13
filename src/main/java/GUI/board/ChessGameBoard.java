@@ -1,7 +1,7 @@
 package GUI.board;
 
 import util.ColorOfPiece;
-import Business.pieces.*;
+import business.pieces.*;
 import GUI.ChessPanel;
 
 import javax.swing.*;

@@ -1,6 +1,6 @@
 package GUI;
 
-import Business.game.ChessGameEngine;
+import business.game.ChessGameEngine;
 import GUI.board.ChessGameBoard;
 
 import javax.swing.*;
